@@ -10,13 +10,6 @@ Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **Dr. Laur
 - Alpha diversity within each community
 - Beta diversity between communities
 
-###Directory/file descriptions
-- mothur-generated files
-- data files modified in R
-- code
-- meta data
-- figures
-
 ###Getting started
 
 ####R and RStudio
@@ -35,7 +28,14 @@ While not required for this workshop, we recommend downloading some type of text
 
 ####Downloading the files
 
-All of the files used in this exercise can be downloaded from this github directory. 
+All of the files used in this exercise can be downloaded from this github directory. Use the __ to download all the files. 
+
+#####Directory/file descriptions
+- mothur-generated files
+- data files modified in R
+- code
+- meta data
+- figures
 
 ###Part I: 
 
