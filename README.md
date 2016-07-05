@@ -37,7 +37,11 @@ All of the files used in this exercise can be downloaded from this github direct
 - meta data
 - figures
 
-###Part I: 
+###Part I: Taxonomic classification
+
+In our presentation, we discussed how sequences within your samples can be taxonomically classified based on the sequence identity (phylotyping). Depending on the level of classification, samples may appear more or less similar to each other. Let's take a look at some of the samples we have previously processed in mothur.
+
+First, let's take a look at the file produced by mothur from the step in taxonomic classification. 
 
 
 
