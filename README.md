@@ -10,7 +10,7 @@ Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **Dr. Laur
 - Alpha diversity within each community
 - Beta diversity between communities
 
-###Directory descriptions
+###Directory/file descriptions
 - mothur-generated files
 - data files modified in R
 - code
@@ -28,6 +28,16 @@ We will be using [R](https://www.r-project.org/) to re-generate some of these an
 **_Mac OS X:_** Install R using [this .pkg file](http://cran.r-project.org/bin/macosx/R-latest.pkg), and install the [RStudio IDE](http://www.rstudio.com/ide/download/desktop).
 
 **_Linux:_** The binary files for your distribution can be found at [CRAN](http://cran.r-project.org/index.html). You can also use your own package manager: for Debian/Ubuntu run ```sudo apt-get install r-base``` and for Fedora run ```sudo yum install R``` . The RStudio IDE can be found [here](https://www.rstudio.com/products/rstudio/download/). 
+
+####Text Editor
+
+While not required for this workshop, we recommend downloading some type of text editor to easily visualize your code. TextNano is a basic editor, and can be installed on Windows from the [Software Carpentry Windows Installer](https://github.com/swcarpentry/windows-installer/releases/download/v0.3/SWCarpentryInstaller.exe). Nano should be pre-installed on both Mac OS X and Linux. If you are using Mac OS X, you could also download [Text Wrangler](http://www.barebones.com/products/textwrangler/).
+
+####Downloading the files
+
+All of the files used in this exercise can be downloaded from this github directory. 
+
+###Part I: 
 
 
 
