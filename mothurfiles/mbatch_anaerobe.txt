@@ -1,0 +1,78 @@
+##mbatch for samples used in Anaerobe class
+## 6.19.16
+
+make.contigs(file=anaerobe.files, processors=8)
+summary.seqs(fasta=anaerobe.trim.contigs.fasta, processors=8)
+screen.seqs(fasta=anaerobe.trim.contigs.fasta, group=anaerobe.contigs.groups, maxambig=0, maxlength=275, processors=8)
+unique.seqs(fasta=anaerobe.trim.contigs.good.fasta)
+count.seqs(name=anaerobe.trim.contigs.good.names, group=anaerobe.contigs.good.groups)
+summary.seqs(count=anaerobe.trim.contigs.good.count_table, processors=8)
+pcr.seqs(fasta=silva.seed_v119.align, start=11894, end=25319, keepdots=F, processors=8)
+system(mv silva.seed_v119.pcr.align silva.v4.fasta)
+summary.seqs(fasta=silva.v4.fasta, processors=8)
+align.seqs(fasta=anaerobe.trim.contigs.good.unique.fasta, reference=silva.v4.fasta, processors=8)
+summary.seqs(fasta=anaerobe.trim.contigs.good.unique.align, count=anaerobe.trim.contigs.good.count_table, processors=8)
+screen.seqs(fasta=anaerobe.trim.contigs.good.unique.align, count=anaerobe.trim.contigs.good.count_table, summary=anaerobe.trim.contigs.good.unique.summary, start=1968, end=11550, maxhomop=8, processors=8)
+summary.seqs(fasta=current, count=current, processors=8)
+filter.seqs(fasta=anaerobe.trim.contigs.good.unique.good.align, vertical=T, trump=., processors=8)
+unique.seqs(fasta=anaerobe.trim.contigs.good.unique.good.filter.fasta, count=anaerobe.trim.contigs.good.good.count_table)
+pre.cluster(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.count_table, diffs=2, processors=8)
+chimera.uchime(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.count_table, dereplicate=t, processors=8)
+remove.seqs(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.fasta, accnos=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.accnos)
+summary.seqs(fasta=current, count=current, processors=8)
+classify.seqs(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, reference=trainset10_082014.rdp.fasta, taxonomy=trainset10_082014.rdp.tax, cutoff=80)
+remove.lineage(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, taxonomy=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.taxonomy, taxon=Chloroplast-Mitochondria-unknown-Archaea-Eukaryota)
+count.seqs(name=current, group=current)
+count.groups(count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table)
+
+#remove.groups(count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta, taxonomy=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.taxonomy, groups=)
+	#if in the future you want to remove samples because they are too low (I usually cutoff any sample with < 1000 seqs), remember to modify the input files for the following commands
+	 #weird errors with count_file--will just remove these groups later--let's see if previous files work
+cluster.split(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, taxonomy=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.taxonomy, splitmethod=classify, taxlevel=5, cutoff=0.15, processors=1)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list anaerobe.final.list)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta anaerobe.final.fasta)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.taxonomy anaerobe.final.taxonomy)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table anaerobe.final.count_table)
+
+# for shared files:
+count.groups(count=anaerobe.final.count_table)
+make.shared(list=anaerobe.final.list, count=anaerobe.final.count_table, label=0.03)
+classify.otu(list=anaerobe.final.list, count=anaerobe.final.count_table, taxonomy=anaerobe.final.taxonomy, label=0.03)
+#remove.groups(count=anaerobe.final.count_table, fasta=anaerobe.final.fasta, taxonomy=anaerobe.final.taxonomy, list=anaerobe.final.list, shared=anaerobe.final.shared, groups=)
+
+## no subsampling results:
+dist.shared(shared=anaerobe.final.shared, calc=thetayc-jclass-jest-braycurtis)
+pcoa(phylip=anaerobe.final.thetayc.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.jclass.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.jest.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.braycurtis.0.03.lt.dist)
+nmds(phylip=anaerobe.final.thetayc.0.03.lt.dist, mindim=3, maxdim=3)
+summary.shared(shared=anaerobe.final.shared, calc=sharedsobs-braycurtis-spearman-thetayc-jsd-sharednseqs)
+summary.single(shared=anaerobe.final.shared, calc=simpsoneven-simpson-invsimpson-shannon-npshannon-sobs-chao-nseqs)
+
+### testing subsample, with filtering:
+sub.sample(shared=anaerobe.final.shared)
+filter.shared(shared=anaerobe.final.0.03.subsample.shared, makerare=F, minpercent=0.0001)		# can do this in R
+dist.shared(shared=anaerobe.final.0.03.subsample.0.03.filter.shared, calc=thetayc-jclass-jest-braycurtis)
+pcoa(phylip=anaerobe.final.0.03.subsample.0.03.filter.thetayc.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.0.03.subsample.0.03.filter.jest.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.0.03.subsample.0.03.filter.jclass.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.0.03.subsample.0.03.filter.braycurtis.0.03.lt.dist)
+nmds(phylip=anaerobe.final.0.03.subsample.0.03.filter.thetayc.0.03.lt.dist, mindim=3, maxdim=3)
+summary.shared(shared=anaerobe.final.0.03.subsample.0.03.filter.shared, calc=sharedsobs-braycurtis-spearman-thetayc-jsd-sharednseqs)
+summary.single(shared=anaerobe.final.0.03.subsample.0.03.filter.shared, calc=simpsoneven-simpson-invsimpson-shannon-npshannon-sobs-chao-nseqs)
+
+
+
+
+
+## no subsampling, but filtering:
+#filter.shared(shared=anaerobe.final.0.03.pick.shared, makerare=F, minpercent=0.0001)
+#dist.shared(shared=anaerobe.final.0.03.pick.0.03.filter.shared, calc=thetayc-jclass-jest)
+#pcoa(phylip=anaerobe.final.0.03.pick.0.03.filter.lt.dist)
+#nmds(phylip=anaerobe.final.0.03.pick.0.03.filter.lt.dist, mindim=3, maxdim=3)
+#summary.shared(shared=anaerobe.final.0.03.pick.0.03.filter.shared, calc=sharedsobs-braycurtis-spearman-thetayc-jsd-sharednseqs)
+#summary.single(shared=anaerobe.final.0.03.pick.0.03.filter.shared, calc=simpsoneven-simpson-invsimpson-shannon-npshannon-sobs-chao-nseqs)
+
+
+
