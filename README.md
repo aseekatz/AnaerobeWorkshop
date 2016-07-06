@@ -37,11 +37,36 @@ All of the files used in this exercise can be downloaded from this github direct
 - meta data
 - figures
 
+####Start the session
+
+We will be using RStudio to interact with R to work with the data. Since we do not have enough time to comprehensively go through all of the steps, we have already created all of the files for you in the described directories above. The goal of this session is to introduce you to 16S data and get you comfortable with the type of data files you might receive after processing your data. Do not be scared! At the end of the session, we will provide you with links to useful sites that you can explore on your own. You should be able to copy/paste the commands as we go through them. Additionally, we hope that this exercise reinforces some of the concepts we discussed earlier in the workshop. 
+
+To get started, fire up RStudio! The most important concept is getting you to the correct directory to run all of the commands. This is the folder that you created when you downlaoded the file.
+
+```
+setwd("~/Box Sync/Meetings/Anaerobe2016/workshop")
+# make sure that this path is set to your own!
+```
+
+If this does not work, you can navigate to where you downloaded the necessary files under the 'Files' tab  in the righthand panel in RStudio, then set the directory using Session > Set Working Directory > Choose directory at the top of RStudio. This should automatically bring up the command above.
+
+If you are not familiar with RStudio, a video tutorial on the different parts can be found [here](https://www.youtube.com/watch?v=I0qNSNt8Vmc). The main components we will be using are described below:
+- **_Code:_** Any code that we will run, or notes that you take, can be viewed in different tabs in the topleft corner.
+- **_Console:_** The bottomleft corner contains the console, where we will actually run the code
+- **_Environment:_** Any objects you have created with your code will be listed here, in the topright corner
+- **_Viewr:_** Available files, plots we create, and the help bar can be viewed in the bottomright corner
+
+
+
+
+
 ###Part I: Taxonomic classification
 
 In our presentation, we discussed how sequences within your samples can be taxonomically classified based on the sequence identity (phylotyping). Depending on the level of classification, samples may appear more or less similar to each other. Let's take a look at some of the samples we have previously processed in mothur.
 
-First, let's take a look at the file produced by mothur from the step in taxonomic classification. 
+First, let's take a look at the file produced by mothur from the step in taxonomic classification. You can do this by typing in the following command, taking care to change the directory based on your own path:
+
+
 
 
 
