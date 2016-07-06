@@ -331,7 +331,7 @@ legend("topleft",legend=c("noFMT", "mFMT"), col="black", pt.bg=c("gold", "chartr
 plot(tyc_nmds_axis3 ~ tyc_nmds_axis2, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="nmds 2", ylab="nmds 3", main="", pch=21)
 ```
 
-1[alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_pcoa.v.nmds2.png)
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_pcoa.v.nmds2.png)
 
 > What information is available in the data file?
 > How do the two ordinations differ from each other? Do they tell you the same story?
