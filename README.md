@@ -148,6 +148,8 @@ legend(15,100,legend=rownames(bar_p),col=col.phy,fill=col.phy,cex=0.5)
 
 You should now have a graph that looks like this:
 
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/mean_phyla.png)
+
 > Did this make the data more interpretable? What does the data tell us now?
 
 Thus far, we have only looked at our data at the phylum level, which is fairly broad. Our original file created in mothur contains deeper taxonomic levels (taxlevel=6 is the genus-level). Let's take a look at the genus-level breakdown of our data:
@@ -163,6 +165,8 @@ par(xpd=T)
 barplot(bar_g, las=2, main="phylotype", ylab="Relative abundance-genera (%)", cex.names=0.6, ylim=c(0,100), col=col.gen, xlim=c(0,90))
 legend(85,110,legend=rownames(bar_g),col=col.gen,fill=col.gen,cex=0.5)
 ```
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/phylotype.png)
 
 > How does this information compare to the phylum-level graph?
 
@@ -183,6 +187,8 @@ par(xpd=T)
 barplot(bar_g, las=2, main="Mean community by day and group", ylab="Relative abundance-genera (%)", cex.names=0.8, ylim=c(0,100), col=col.gen, xlim=c(0,15))
 legend(13,100,legend=rownames(bar_g),col=col.gen,fill=col.gen,cex=0.5)
 ```
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/mean_phylotype.png)
 
 > Compare this genus-level graph to the simplified phylum-level graph. Do they look the same?
 
@@ -215,6 +221,8 @@ summary(sums$FMT)
 	# comparison of FMT v. no FMT, as a whole:
 plot(sums$FMT, sums$invsimpson_03)
 ```
+
+![alt tag]()
 
 It looks like there are some differences in diversity between the noFMT and mFMT groups! However, let's take a closer look at the distribution of the data:
 
@@ -261,6 +269,8 @@ plot(sums$FMT, sums$sobs_03, tck=-0.05, lwd=0.8, cex=1, cex.lab=0.8, cex.axis=0.
 points(sobs_03 ~ jitter(as.numeric(FMT, factor=0)), data=sums, pch=21, col="black", bg=group.col(sums$FMT), cex=1)
 ```
 
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/alpha_diversity.png)
+
 > Are there differences in the group comparisons based on the choice of alpha diversity?
 
 For some of the diversity comparisons, it looks like we have both high and low diversity samples within one of the treatment groups. Let's take a look at the differences between the groups over time (days):
@@ -271,6 +281,8 @@ boxplots.double = boxplot(invsimpson_03~FMT + day, data = sums, at = c(1, 2, 4, 
 axis(side=1, at=c(1.5, 4.5, 7.5, 10.5, 13.5), labels=c('-7', '1', '4', '11', '19'), line=0.5, lwd=0)
 legend("topleft", c("noFMT", "mFMT"), col=c("gold", "chartreuse3"), cex=0.8, pch=15)
 ```
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/alphadiv_overtime.png)
 
 > What does the data look like now? 
 > Does diversity tell us about community membership or similarity to each other at all?
@@ -316,6 +328,8 @@ plot(tyc_nmds_axis3 ~ tyc_nmds_axis1, data=sums, col="black", bg=group.col(sums$
 legend("topleft",legend=c("noFMT", "mFMT"), col="black", pt.bg=c("gold", "chartreuse3"), cex=1, pch=21)
 plot(tyc_nmds_axis3 ~ tyc_nmds_axis2, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="nmds 2", ylab="nmds 3", main="", pch=21)
 ```
+
+1[alt tag]()
 
 > What information is available in the data file?
 > How do the two ordinations differ from each other? Do they tell you the same story?
@@ -388,6 +402,8 @@ plot(jest_pcoa_axis2 ~ jest_pcoa_axis1, data=sums, col=group2.col(sums$day), pch
 	legend("bottomright",legend=c("d-7", "d1", "d4", "d11", "d19"), col=c("chartreuse3", "lightpink", "magenta", "darkmagenta", "blue"), cex=0.8, pch=19)
 ```
 
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_diff.distances.png)
+
 > Does the type of distance metric used give you a different answer?
 > What are some of the main differences between these calculators?
 
@@ -419,6 +435,8 @@ plot<-boxplot(thetayc~day_s1, data=pairs.groups, ylab="thetayc", las=2, xlab="",
 text(x =  seq(1,5,by=1), y = par("usr")[3]-0.03, srt = 45, adj = 1, labels = c("d-7", "d1", "d4", "d11", "d19"), xpd = TRUE)
 
 ```
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_pairwise.groups.png)
 
 > What does this graph display?
 > What comparisons are being made?
@@ -506,7 +524,9 @@ arrows(x+0.25, m.ave-m.sd, x+0.25, m.ave+m.sd, length=0.05, angle=90, code=3, co
 axis(1, at=x+0.125, labels=c("d-7 to d1", "d1 to d4", "d4 to d11", "d11 to d19"))												#adds labels to the graph
 ```
 
-> How does this information differ from the first pairwise comparison
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_pairwise.overtime.png)
+
+> How does this information differ from the first pairwise comparison?
 
 As you can see, there are many ways to make pairwise comparisons. When you are analyzing your data, think about your main question, and how that can best be answered. Of course, for some of us, data exploration is a way of life. We encourage you to explore your data in many ways--each of these 'experiments' can give you a different piece of information that can be useful in guiding you to the next big question. 
 
