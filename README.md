@@ -203,7 +203,7 @@ taxonomy<-read.table(file="mothurfiles/anaerobe.final.0.03.cons.taxonomy", heade
 > What is the difference between the phylotype file in the first exercise and the .shared file above?
 > What does the 'taxonomy' file tell us?
 
-We have combined some of these pieces of information for you below. Take a look at the combined data file below, and let's look at our first alpha diversity measure, the inverse Simpson index:
+We have combined some of these pieces of information for you below (the full code can be viewed in the file alpha_diversity.R). Take a look at the combined data file below, and let's look at our first alpha diversity measure, the inverse Simpson index:
 
 ```
 sums<-read.table(file="anaerobe_summary.txt", header=TRUE)
@@ -260,7 +260,146 @@ points(sobs_03 ~ jitter(as.numeric(FMT, factor=0)), data=sums, pch=21, col="blac
 
 > Are there differences in the group comparisons based on the choice of alpha diversity?
 
-For some of the 
+For some of the diversity comparisons, it looks like we have both high and low diversity samples within one of the treatment groups. Let's take a look at the differences between the groups over time (days):
+
+```
+# we see that there is a variable distribution of points--let's consider days in our equation
+boxplots.double = boxplot(invsimpson_03~FMT + day, data = sums, at = c(1, 2, 4, 5, 7, 8, 10, 11, 13, 14), xaxt='n', col = c('chartreuse3', 'gold'), ylab="inverse Simpson index")
+axis(side=1, at=c(1.5, 4.5, 7.5, 10.5, 13.5), labels=c('-7', '1', '4', '11', '19'), line=0.5, lwd=0)
+legend("topleft", c("noFMT", "mFMT"), col=c("gold", "chartreuse3"), cex=0.8, pch=15)
+```
+
+> What does the data look like now? 
+> Does diversity tell us about community membership or similarity to each other at all?
+
+####Part III: Beta diversity
+
+Alpha diversity is a useful measure of comparison to calculate the species richness within a community. However, just because two communities have similar diversities does not mean that the same types of community members are shared between those communities. Beta diversity describes the similarity between communities, generally using pairwise comparisons across the data set.
+
+In mothur, we calculated a distance matrix of pairwise similarities using different types of distance metrics. Take a look at the (modified) file generated in mothur:
+
+```
+pairwise.dist<-read.table(file="mothurfiles/anaerobe.final.summary_modified.txt", header=TRUE)
+pcoa.loadings<-read.table(file="mothurfiles/anaerobe.final.thetayc.0.03.lt.pcoa.loadings", header=TRUE)
+head(pairwise.dist)
+```
+
+> What information is displayed in this file?
+
+In part II, we also combined some of this information by calculating the Principal Coordinates Analysis (PCOA) and Non-metric Dimensional Scaling (NMDS) axes. Briefly, both of these multi-dimensional ordination analyses take the calculated pairwise distances, and flatten them into a 2D axis we can view. PCOA will generate as many axes as you have samples, with each consecutive axis contributing less. The loadings file shows the % variance explained by each axis. NMDS collapses all of the information (i.e., considers all of the OTUs or species differences between the samples) into an ordination you can visualize, using rank-order. 
+
+Let's compare how PCOA and NMDS differ using the same distance calculator, the Yue and Clayton theta measure of dissimilarity (theta yc). Copy/paste the following commands, taking a look at the files and figure generated:
+
+```
+# read in file from last exercise:
+sums<-read.table(file="datafiles/anaerobe_summary.txt", header=TRUE)
+
+# color scheme:
+group.col <- function(n) {
+colorvec <- vector(mode="character", length=length(n))
+for (i in 1:length(n)) {
+colorvec[i] = "light grey"
+if ( n[i] == "mFMT" ) {
+colorvec[i] = "chartreuse3"
+}
+if ( n[i] == "noFMT" ) {
+colorvec[i] = "gold"
+}
+}
+c(colorvec)
+}
+
+# PCOA vs. NMDS
+par(mfrow=c(2,3))
+	# PCOA axes:
+	#plot(tyc_pcoa_axis2 ~ tyc_pcoa_axis1, data=sums, col=group.col(sums$FMT), pch=type.pch(fecal$ComboGrp), cex=1.2, xlab="PCoA 1 (27.2%)", ylab="PCoA 2 (19.5%)", main="")
+plot(tyc_pcoa_axis2 ~ tyc_pcoa_axis1, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="PCoA 1 (27.2%)", ylab="PCoA 2 (19.5%)", main="", pch=21)
+plot(tyc_pcoa_axis3 ~ tyc_pcoa_axis1, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="PCoA 1 (27.2%)", ylab="PCoA 3 (10.5%)", main="", pch=21)
+legend("topleft",legend=c("noFMT", "mFMT"), col="black", pt.bg=c("gold", "chartreuse3"), cex=1, pch=21)
+plot(tyc_pcoa_axis3 ~ tyc_pcoa_axis2, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="PCoA 2 (19.5%)", ylab="PCoA 3 (10.5%)", main="", pch=21)
+	# NMDS
+plot(tyc_nmds_axis2 ~ tyc_nmds_axis1, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="nmds 1", ylab="nmds 2", main="", pch=21)
+plot(tyc_nmds_axis3 ~ tyc_nmds_axis1, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="nmds 1", ylab="nmds 3", main="", pch=21)
+legend("topleft",legend=c("noFMT", "mFMT"), col="black", pt.bg=c("gold", "chartreuse3"), cex=1, pch=21)
+plot(tyc_nmds_axis3 ~ tyc_nmds_axis2, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="nmds 2", ylab="nmds 3", main="", pch=21)
+```
+
+> What information is available in the data file?
+> How do the two ordinations differ from each other? Do they tell you the same story?
+
+Both of the ordinations show a potential for differences between the samples. Let's also consider the day in our analyses. We need to add some additional meta data information to visualize by both group and day. In addition to this, we have also included the PCOA calculations from other types of commonly distance metrics: the Bray-Curtis similarity coefficient, the Jaccard similarity coefficient (based on species richness), and the Jaccard similarity coefficient based on the Chao1 estimated richness.
+
+```
+# let's also put some information about the days
+	# color/point schemes:
+type.pch <- function(n) {
+pchvec <- vector(mode="numeric", length=length(n))
+for (i in 1:length(n)) {
+pchvec[i] = 1
+if ( n[i] == "noFMT" ) {
+pchvec[i] = 19
+}
+if (n[i] == "mFMT" ) {
+pchvec[i] = 17
+}
+}
+c(pchvec)
+}
+
+group2.col <- function(n) {
+colorvec <- vector(mode="character", length=length(n))
+for (i in 1:length(n)) {
+colorvec[i] = "light grey"
+if ( n[i] == -7 ) {
+colorvec[i] = "chartreuse3"
+}
+if ( n[i] == 1 ) {
+colorvec[i] = "lightpink"
+}
+if ( n[i] == 4 ) {
+colorvec[i] = "magenta"
+}
+if ( n[i] == 11 ) {
+colorvec[i] = "darkmagenta"
+}
+if ( n[i] == 19 ) {
+colorvec[i] = "blue"
+}
+}
+c(colorvec)
+}
+sums$day<-as.factor(sums$day)
+
+par(mfrow=c(2,3))
+	# PCOA axes:
+	#plot(tyc_pcoa_axis2 ~ tyc_pcoa_axis1, data=sums, col=group.col(sums$FMT), pch=type.pch(sums$FMT), cex=1.2, xlab="PCoA 1 (27.2%)", ylab="PCoA 2 (19.5%)", main="")
+plot(tyc_pcoa_axis2 ~ tyc_pcoa_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(as.character(sums$FMT)), cex=1.2, xlab="PCoA 1 (27.2%)", ylab="PCoA 2 (19.5%)", main="")
+plot(tyc_pcoa_axis3 ~ tyc_pcoa_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(sums$FMT), cex=1.2, xlab="PCoA 1 (27.2%)", ylab="PCoA 3 (10.5%)", main="")
+	legend("topleft",legend=c("noFMT", "mFMT"), col="black", cex=1, pch=c(19, 17))
+	legend("bottomleft",legend=c("d-7", "d1", "d4", "d11", "d19"), col=c("chartreuse3", "lightpink", "magenta", "darkmagenta", "blue"), cex=1, pch=19)
+plot(tyc_pcoa_axis3 ~ tyc_pcoa_axis2, data=sums, col=group2.col(sums$day), pch=type.pch(sums$FMT), cex=1.2, xlab="PCoA 2 (19.5%)", ylab="PCoA 3 (10.5%)", main="")
+	# NMDS
+plot(tyc_nmds_axis2 ~ tyc_nmds_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(sums$FMT), cex=1.2, xlab="nmds 1", ylab="nmds 2", main="")
+plot(tyc_nmds_axis3 ~ tyc_nmds_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(sums$FMT), cex=1.2, xlab="nmds 1", ylab="nmds 3", main="")
+	legend("topleft",legend=c("noFMT", "mFMT"), col="black", cex=1, pch=c(19, 17))
+	legend("bottomleft",legend=c("d-7", "d1", "d4", "d11", "d19"), col=c("chartreuse3", "lightpink", "magenta", "darkmagenta", "blue"), cex=1, pch=19)
+plot(tyc_nmds_axis3 ~ tyc_nmds_axis2, data=sums, col=group2.col(sums$day), pch=type.pch(sums$FMT), cex=1.2, xlab="nmds 2", ylab="nmds 3", main="")
+
+## let's also compare different types of distance metrics (using PCOA, first axes only):
+par(mfrow=c(2,2))
+plot(tyc_pcoa_axis2 ~ tyc_pcoa_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(as.character(sums$FMT)), cex=1.2, xlab="Theta-yc: PCoA 1", ylab="Theta-yc: PCoA 2", main="")
+plot(bc_pcoa_axis2 ~ bc_pcoa_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(as.character(sums$FMT)), cex=1.2, xlab="Bray-Curtis: PCoA 1", ylab="Bray-Curtis: PCoA 2", main="")
+plot(jac_pcoa_axis2 ~ jac_pcoa_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(as.character(sums$FMT)), cex=1.2, xlab="Jaccard: PCoA 1", ylab="Jaccard: PCoA 2", main="")
+plot(jest_pcoa_axis2 ~ jest_pcoa_axis1, data=sums, col=group2.col(sums$day), pch=type.pch(as.character(sums$FMT)), cex=1.2, xlab="Jaccard w/ Chao Est.: PCoA 1", ylab="Jaccard w/ Chao Est.: PCoA 2", main="")
+	legend("topright",legend=c("noFMT", "mFMT"), col="black", cex=0.8, pch=c(19, 17))
+	legend("bottomright",legend=c("d-7", "d1", "d4", "d11", "d19"), col=c("chartreuse3", "lightpink", "magenta", "darkmagenta", "blue"), cex=0.8, pch=19)
+```
+
+> Does the type of distance metric used give you a different answer?
+> What are some of the main differences between these calculators?
+
+
+
 
 
 
