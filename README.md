@@ -276,17 +276,7 @@ legend("topleft", c("noFMT", "mFMT"), col=c("gold", "chartreuse3"), cex=0.8, pch
 
 Alpha diversity is a useful measure of comparison to calculate the species richness within a community. However, just because two communities have similar diversities does not mean that the same types of community members are shared between those communities. Beta diversity describes the similarity between communities, generally using pairwise comparisons across the data set.
 
-In mothur, we calculated a distance matrix of pairwise similarities using different types of distance metrics. Take a look at the (modified) file generated in mothur:
-
-```
-pairwise.dist<-read.table(file="mothurfiles/anaerobe.final.summary_modified.txt", header=TRUE)
-pcoa.loadings<-read.table(file="mothurfiles/anaerobe.final.thetayc.0.03.lt.pcoa.loadings", header=TRUE)
-head(pairwise.dist)
-```
-
-> What information is displayed in this file?
-
-In part II, we also combined some of this information by calculating the Principal Coordinates Analysis (PCOA) and Non-metric Dimensional Scaling (NMDS) axes. Briefly, both of these multi-dimensional ordination analyses take the calculated pairwise distances, and flatten them into a 2D axis we can view. PCOA will generate as many axes as you have samples, with each consecutive axis contributing less. The loadings file shows the % variance explained by each axis. NMDS collapses all of the information (i.e., considers all of the OTUs or species differences between the samples) into an ordination you can visualize, using rank-order. 
+In part II, we combined some of this information by calculating the Principal Coordinates Analysis (PCOA) and Non-metric Dimensional Scaling (NMDS) axes. Briefly, both of these multi-dimensional ordination analyses take the calculated pairwise distances, and flatten them into a 2D axis we can view. PCOA will generate as many axes as you have samples, with each consecutive axis contributing less. The loadings file shows the % variance explained by each axis. NMDS collapses all of the information (i.e., considers all of the OTUs or species differences between the samples) into an ordination you can visualize, using rank-order. 
 
 Let's compare how PCOA and NMDS differ using the same distance calculator, the Yue and Clayton theta measure of dissimilarity (theta yc). Copy/paste the following commands, taking a look at the files and figure generated:
 
@@ -398,6 +388,137 @@ plot(jest_pcoa_axis2 ~ jest_pcoa_axis1, data=sums, col=group2.col(sums$day), pch
 > Does the type of distance metric used give you a different answer?
 > What are some of the main differences between these calculators?
 
+Ordination is one way to visualize potential similarities within a data set. We can also directly compare the pairwise distances. In mothur, we calculated a distance matrix of pairwise similarities using different types of distance metrics. Take a look at the (modified) file generated in mothur:
+
+```
+pairwise.dist<-read.table(file="mothurfiles/anaerobe.final.summary_modified.txt", header=TRUE)
+pcoa.loadings<-read.table(file="mothurfiles/anaerobe.final.thetayc.0.03.lt.pcoa.loadings", header=TRUE)
+head(pairwise.dist)
+```
+
+> What information is displayed in this file?
+
+Let's do a couple comparisons between the groups. We have previously created this file for you, but you can view the full code to create this file in the beta_diversity.R file. Read in the following file, and let's parse out the comparisons we want:
+
+```
+m2<-read.table(file="datafiles/anaerobe_all.dist.txt", header=TRUE)
+
+# now, let's only take pairwise comparisons where the day is the same between 2 samples:
+pairs.byday<-m2[m2$day_s1==m2$day_s2, ]
+
+# from these, let's concentrate only on differences between noFMT and mFMT:
+p1<-pairs.byday[pairs.byday$FMT_s1==c("noFMT") & pairs.byday$FMT_s2==c("mFMT"), ]
+p2<-pairs.byday[pairs.byday$FMT_s1==c("mFMT") & pairs.byday$FMT_s2==c("noFMT"), ]		#none in this one, but had to check
+pairs.groups<-rbind(p1, p2)
+
+# now, let's graph by day:
+plot<-boxplot(thetayc~day_s1, data=pairs.groups, ylab="thetayc", las=2, xlab="", xaxt="n", main="noFMT vs. mFMT, by day", ylim=c(0,1), col=c("chartreuse3", "lightpink", "magenta", "darkmagenta", "blue"))
+text(x =  seq(1,5,by=1), y = par("usr")[3]-0.03, srt = 45, adj = 1, labels = c("d-7", "d1", "d4", "d11", "d19"), xpd = TRUE)
+
+```
+
+> What does this graph display?
+> What comparisons are being made?
+
+The graph above measures the similarity between each of the groups on each particular day. Another way to look at the data is to compare changes within the group over time, and whether one group appears to be changing more than the other. Let's make that comparison:
+
+```
+# let's also look at how each of the groups changes over time:
+	# mFMT group:
+mFMT<-m2[m2$FMT_s1==c("mFMT") & m2$FMT_s2==c("mFMT"), ]		# select only one group to compare
+test<-mFMT[mFMT$sampleID_s1== mFMT$sampleID_s2, ]		# select only between the same mouse
+	# must do this for each time comparison:
+t1A<-mFMT[mFMT$day_s1==c("-7") & mFMT$day_s2==c("1"), ]
+t1B<-mFMT[mFMT$day_s1==c("1") & mFMT$day_s2==c("-7"), ]
+t1<-rbind(t1A, t1B)
+t1$TIME<-1
+t2A<-mFMT[mFMT$day_s1==c("4") & mFMT$day_s2==c("1"), ]
+t2B<-mFMT[mFMT$day_s1==c("1") & mFMT$day_s2==c("4"), ]
+t2<-rbind(t2A, t2B)
+t2$TIME<-2
+t3A<-mFMT[mFMT$day_s1==c("4") & mFMT$day_s2==c("11"), ]
+t3B<-mFMT[mFMT$day_s1==c("11") & mFMT$day_s2==c("4"), ]
+t3<-rbind(t3A, t3B)
+t3$TIME<-3
+t4A<-mFMT[mFMT$day_s1==c("19") & mFMT$day_s2==c("11"), ]
+t4B<-mFMT[mFMT$day_s1==c("11") & mFMT$day_s2==c("19"), ]
+t4<-rbind(t4A, t4B)
+t4$TIME<-4
+mFMT.pairs<-rbind(t1, t2, t3, t4)
+
+	# noFMT group:
+noFMT<-m2[m2$FMT_s1==c("noFMT") & m2$FMT_s2==c("noFMT"), ]
+t1A<-noFMT[noFMT$day_s1==c("-7") & noFMT$day_s2==c("1"), ]
+t1B<-noFMT[noFMT$day_s1==c("1") & noFMT$day_s2==c("-7"), ]
+t1<-rbind(t1A, t1B)
+t1$TIME<-1
+t2A<-noFMT[noFMT$day_s1==c("4") & noFMT$day_s2==c("1"), ]
+t2B<-noFMT[noFMT$day_s1==c("1") & noFMT$day_s2==c("4"), ]
+t2<-rbind(t2A, t2B)
+t2$TIME<-2
+t3A<-noFMT[noFMT$day_s1==c("4") & noFMT$day_s2==c("11"), ]
+t3B<-noFMT[noFMT$day_s1==c("11") & noFMT$day_s2==c("4"), ]
+t3<-rbind(t3A, t3B)
+t3$TIME<-3
+t4A<-noFMT[noFMT$day_s1==c("19") & noFMT$day_s2==c("11"), ]
+t4B<-noFMT[noFMT$day_s1==c("11") & noFMT$day_s2==c("19"), ]
+t4<-rbind(t4A, t4B)
+t4$TIME<-4
+noFMT.pairs<-rbind(t1, t2, t3, t4)
+
+# now, graph these over time:
+	# make mean distance over time:
+library(plyr)
+	# for noFMT group:
+no.data <- ddply(noFMT.pairs, c("TIME"), summarise,
+               N    = length(thetayc),
+               mean = mean(thetayc),
+               sd   = sd(thetayc),
+               se   = sd / sqrt(N) )
+
+no.ave<-as.numeric(no.data$mean)
+no.sd<-as.numeric(no.data$sd)
+
+	# for mFMT group:
+m.data <- ddply(mFMT.pairs, c("TIME"), summarise,
+               N    = length(thetayc),
+               mean = mean(thetayc),
+               sd   = sd(thetayc),
+               se   = sd / sqrt(N) )
+
+m.ave<-as.numeric(m.data$mean)
+m.sd<-as.numeric(m.data$sd)
+
+# now, graph it:
+x<-no.data$TIME														
+plot(x, no.ave,
+    ylim=c(0, 1.2), xlim=c(0.75, 4.5),
+    pch=21, xlab="consecutive days", ylab="Mean change over time",
+    main="change over time (thetayc)", xaxt='n', col="black", bg="gold")
+lines(x, no.ave, col="gold")	
+lines(x+0.25, m.ave, col="chartreuse4")	
+points(x+0.25, m.ave, bg="chartreuse3", col="black", pch=21)
+arrows(x, no.ave-no.sd, x, no.ave+no.sd, length=0.05, angle=90, code=3, col="gold")	#adds sd to the graph
+arrows(x+0.25, m.ave-m.sd, x+0.25, m.ave+m.sd, length=0.05, angle=90, code=3, col="chartreuse3")
+axis(1, at=x+0.125, labels=c("d-7 to d1", "d1 to d4", "d4 to d11", "d11 to d19"))												#adds labels to the graph
+```
+
+> How does this information differ from the first pairwise comparison
+
+As you can see, there are many ways to make pairwise comparisons. When you are analyzing your data, think about your main question, and how that can best be answered. Of course, for some of us, data exploration is a way of life. We encourage you to explore your data in many ways--each of these 'experiments' can give you a different piece of information that can be useful in guiding you to the next big question. 
+
+####Conclusions
+
+Some last questions to consider:
+> What type of information did each of these analyses provide?
+> How did these analyses differ from each other?
+
+We hope that this short exercise gave you a better understanding of how microbiome data is interpreted and handled. If this was overwhelming, do not be intimidated! Learning how to process this data can be a long journey, but there are multiple free online tutorials and courses. Programming is not only useful for 16S rRNA analysis, but for any large -omics datasets.
+
+#####Helpful websites:
+- **_[Software Carpentry](http://software-carpentry.org/)_** provides free workshops and tutorials around the world. While they do host onsite workshops, many of them can be accessed live online. Check them out!
+- **_[Coursera}(https://www.coursera.org/)_** offers multiple online courses on data analysis and programming, such as learning R or Python. 
+- [Dr. Patrick Schloss](http://www.schlosslab.org/) at the University of Michigan offers in-person workshops on both [mothur and R](http://www.mothur.org/wiki/Workshops). If you are planning on using mothur, this course is particularly helpful in understanding your data. 
 
 
 
