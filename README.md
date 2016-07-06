@@ -28,14 +28,14 @@ While not required for this workshop, we recommend downloading some type of text
 
 ####Downloading the files
 
-All of the files used in this exercise can be downloaded from this github directory. Use the __ to download all the files. 
+All of the files used in this exercise can be downloaded from this github directory. Use the green 'Clone or Download' button on the topright to download all the files. 
 
 #####Directory/file descriptions
-- mothur-generated files
-- data files modified in R
-- code
-- meta data
-- figures
+- [mothur-generated files](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/mothurfiles)
+- [data files modified in R](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/datafiles)
+- [code](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/Rcode)
+- [metadata](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt)
+- [figures](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/figures)
 
 ####Start the session
 
@@ -60,7 +60,7 @@ With that, let's get started on looking at our data!
 
 ###Part I: Taxonomic classification
 
-In our presentation, we discussed how sequences within your samples can be taxonomically classified based on the sequence identity (phylotyping). Depending on the level of classification, samples may appear more or less similar to each other. Let's take a look at some of the samples we have previously processed in mothur. We will not be going over every part of the code, but a full description of the steps taken to create the files used here can be found in the phylotyping.R file. 
+In our presentation, we discussed how sequences within your samples can be taxonomically classified based on the sequence identity (phylotyping). Depending on the level of classification, samples may appear more or less similar to each other. Let's take a look at some of the samples we have previously processed in mothur. We will not be going over every part of the code, but a full description of the steps taken to create the files used here can be found in the [phylotyping.R](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/Rcode/phylotyping.R) file. 
 
 First, let's take a look at the file produced by mothur from the step in taxonomic classification. You can do this by typing in the following commands in the console section of RStudio:
 
@@ -82,6 +82,7 @@ tax2[, c("rankID", "taxon")]		# these are the phyla you have represented
 ```
 
 Now, if you click on tax2, you should notice that it is a much smaller file. In fact, it is only 12 rows, one for each of the phyla found in the full data set.
+
 > Can you compare these numbers for each sample in its current form? Why or why not?
 
 There are a couple integral steps we need to take before we can make sense of this. We probably want to normalize the data somehow, eliminate some of the data based on a defined cutoff, and add sample information to the sampleIDs. The full code to do this can be viewed in the phylotyping.R file. To save some time, we have already created a file that has this information.
@@ -116,6 +117,8 @@ par(xpd=T)
 barplot(bar_p, las=2, main="phylotype: phylum-level", ylab="Relative abundance-phyla (%)", cex.names=0.6, ylim=c(0,100), col=col.phy, xlim=c(0,90))
 legend(85,100,legend=rownames(bar_p),col=col.phy,fill=col.phy,cex=0.5)
 ```
+
+
 
 You should have a graph in your viewer that looks like the following:
 
