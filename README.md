@@ -118,9 +118,9 @@ barplot(bar_p, las=2, main="phylotype: phylum-level", ylab="Relative abundance-p
 legend(85,100,legend=rownames(bar_p),col=col.phy,fill=col.phy,cex=0.5)
 ```
 
-
-
 You should have a graph in your viewer that looks like the following:
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/phylum.png)
 
 > Is this graph easy to interpret? What does it tell you?
 
