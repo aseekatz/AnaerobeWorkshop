@@ -222,7 +222,7 @@ summary(sums$FMT)
 plot(sums$FMT, sums$invsimpson_03)
 ```
 
-![alt tag]()
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/invsimpson.png)
 
 It looks like there are some differences in diversity between the noFMT and mFMT groups! However, let's take a closer look at the distribution of the data:
 
@@ -247,6 +247,8 @@ plot(sums$FMT, sums$invsimpson_03, tck=-0.05, lwd=0.8, cex=1, cex.lab=0.8, cex.a
 	pch=".", ylim=c(0,35), main="", ylab="inverse Simpson index", xlab="group")
 points(invsimpson_03 ~ jitter(as.numeric(FMT, factor=0)), data=sums, pch=21, col="black", bg=group.col(sums$FMT), cex=1)
 ```
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/invsimpson2.png)
 
 > What does the data tell us now?
 
@@ -329,7 +331,7 @@ legend("topleft",legend=c("noFMT", "mFMT"), col="black", pt.bg=c("gold", "chartr
 plot(tyc_nmds_axis3 ~ tyc_nmds_axis2, data=sums, col="black", bg=group.col(sums$FMT), cex=1.2, xlab="nmds 2", ylab="nmds 3", main="", pch=21)
 ```
 
-1[alt tag]()
+1[alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_pcoa.v.nmds2.png)
 
 > What information is available in the data file?
 > How do the two ordinations differ from each other? Do they tell you the same story?
