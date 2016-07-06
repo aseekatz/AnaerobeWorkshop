@@ -516,9 +516,12 @@ Some last questions to consider:
 We hope that this short exercise gave you a better understanding of how microbiome data is interpreted and handled. If this was overwhelming, do not be intimidated! Learning how to process this data can be a long journey, but there are multiple free online tutorials and courses. Programming is not only useful for 16S rRNA analysis, but for any large -omics datasets.
 
 #####Helpful websites:
-- **_[Software Carpentry](http://software-carpentry.org/)_** provides free workshops and tutorials around the world. While they do host onsite workshops, many of them can be accessed live online. Check them out!
-- **_[Coursera}(https://www.coursera.org/)_** offers multiple online courses on data analysis and programming, such as learning R or Python. 
-- [Dr. Patrick Schloss](http://www.schlosslab.org/) at the University of Michigan offers in-person workshops on both [mothur and R](http://www.mothur.org/wiki/Workshops). If you are planning on using mothur, this course is particularly helpful in understanding your data. 
+- **[Software Carpentry](http://software-carpentry.org/)** provides free workshops and tutorials around the world. While they do host onsite workshops, many of them can be accessed live online. Check them out!
+- **[Coursera](https://www.coursera.org/)** offers multiple online courses on data analysis and programming, such as learning R or Python. 
+- [Dr. Patrick Schloss](http://www.schlosslab.org/) at the University of Michigan offers in-person workshops on both **[mothur and R](http://www.mothur.org/wiki/Workshops)**. If you are planning on using mothur, this course is particularly helpful in understanding your data.
+
+
+
 
 
 
