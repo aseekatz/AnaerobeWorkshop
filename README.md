@@ -161,7 +161,7 @@ Thus far, we have only looked at our data at the phylum level, which is fairly b
 bar<-read.table(file="datafiles/anaerobe_genfrac1p_w.meta.txt", header=TRUE)
 
 # specify a color scheme:
-color<-c("darkgreen", "green4", "green3", "chartreuse3", "greenyellow", "darkolivegreen2", 
+col.gen<-c("darkgreen", "green4", "green3", "chartreuse3", "greenyellow", "darkolivegreen2", 
 		"midnightblue", "mediumblue", "blue3", "blue", "dodgerblue4", "dodgerblue1", "deepskyblue4", "deepskyblue1", "skyblue3", "skyblue", "steelblue4", "steelblue1", "royalblue4", "royalblue1", "slateblue4", "purple", 
 		"yellow2", "darkgoldenrod3", "goldenrod2", "goldenrod1", "gold", 
 		"maroon", "red4", "tomato3", 
