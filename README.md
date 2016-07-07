@@ -225,7 +225,7 @@ taxonomy<-read.table(file="mothurfiles/anaerobe.final.0.03.cons.taxonomy", heade
 We have combined some of these pieces of information for you below (the full code can be viewed in the file alpha_diversity.R). Take a look at the combined data file below, and let's look at our first alpha diversity measure, the inverse Simpson index:
 
 ```
-sums<-read.table(file="anaerobe_summary.txt", header=TRUE)
+sums<-read.table(file="datafiles/anaerobe_summary.txt", header=TRUE)
 summary(sums$FMT)
 #compare shannon, invsimpson, and sobs (# 'species')
 	# comparison of FMT v. no FMT, as a whole:
