@@ -59,7 +59,7 @@ phyla<-read.table(file="anaerobe_phyla1p.txt", header=TRUE, row.names=1)
 	barp<-as.data.frame(t(rm_p))
 		# add 'other' category
 	barp$sampleID<-rownames(barp)
-	col.phy<-as.character(phyla$color, "grey47")
+	#col.phy<-c(as.character(phyla$color), "grey47")
 bar<-merge(meta, barp, by.x=c("seqID"), by.y=c("sampleID"))
 #write.table(bar, 'anaerobe_phyla1p_w.meta.txt',quote=FALSE,sep="\t", col.names=TRUE, row.names=FALSE)
 
@@ -68,6 +68,7 @@ bar<-merge(meta, barp, by.x=c("seqID"), by.y=c("sampleID"))
 bar<-bar[order(bar$day, bar$FMT, bar$mouse), ]
 rownames(bar)<-bar$sampleID
 
+col.phy<-c("chartreuse3", "dodgerblue4", "yellow2", "red4", "hotpink", "cyan", "black")
 bar_p<-as.matrix(t(bar[19:ncol(bar)]))
 par(mar=c(5,4,2,5))
 par(xpd=T)
@@ -144,7 +145,7 @@ genbar<-read.table(file="anaerobe_genera1p.txt", header=TRUE, row.names=2)
 	barg$other<-100-rowSums(barg)
 	others<-100-colSums(barg)
 	barg$sampleID<-rownames(barg)
-	col.gen<-as.character(genbar$color, "grey47")
+	col.gen<-c(as.character(genbar$color), "grey47")
 	#barg$sampleID<-gsub("X19_", "19_", barg$sampleID)
 bar<-merge(meta, barg, by.x=c("seqID"), by.y=c("sampleID"))
 #write.table(bar, 'anaerobe_genfrac1p_w.meta.txt',quote=FALSE,sep="\t", col.names=TRUE, row.names=FALSE)
