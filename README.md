@@ -2,7 +2,7 @@
 
 Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **Dr. Laura Cox** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
 
-**_Date:_** July 10, 2016
+**_Date:_** July 11, 2016
 
 **_Description:_** This portion of the workshop will give you a brief introduction to looking at 16S rRNA data output. While we do not have time to go over how the sequencing data is processed, several free tools are available for data processing. The data we will use in this workshop have been processed using the software [mothur](http://www.mothur.org/). A full batch file of the commands used to process the data files used to produce the data in this workshop are described in the file mbatch_anaerobe.txt. Another software pipeline used to process 16S rRNA data is [QIIME](http://qiime.org/). We encourage you to check out the documentation and tutorials available for both as a first step in your data analysis. We will be looking at the files used to generate the following analyses and figures:
 
