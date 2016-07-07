@@ -459,7 +459,6 @@ The graph above measures the similarity between each of the groups on each parti
 # let's also look at how each of the groups changes over time:
 	# mFMT group:
 mFMT<-m2[m2$FMT_s1==c("mFMT") & m2$FMT_s2==c("mFMT"), ]		# select only one group to compare
-test<-mFMT[mFMT$sampleID_s1== mFMT$sampleID_s2, ]		# select only between the same mouse
 	# must do this for each time comparison:
 t1A<-mFMT[mFMT$day_s1==c("-7") & mFMT$day_s2==c("1"), ]
 t1B<-mFMT[mFMT$day_s1==c("1") & mFMT$day_s2==c("-7"), ]
