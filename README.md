@@ -1,6 +1,6 @@
 # Anaerobe Workshop
 
-Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **Dr. Laura Cox** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
+Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
 
 **_Date:_** July 11, 2016
 
