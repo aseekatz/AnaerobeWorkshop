@@ -1,6 +1,6 @@
 # Anaerobe Workshop
 
-Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **Dr. Laura Cox** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
+Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
 
 **_Date:_** July 11, 2016
 
@@ -225,7 +225,7 @@ taxonomy<-read.table(file="mothurfiles/anaerobe.final.0.03.cons.taxonomy", heade
 We have combined some of these pieces of information for you below (the full code can be viewed in the file alpha_diversity.R). Take a look at the combined data file below, and let's look at our first alpha diversity measure, the inverse Simpson index:
 
 ```
-sums<-read.table(file="anaerobe_summary.txt", header=TRUE)
+sums<-read.table(file="datafiles/anaerobe_summary.txt", header=TRUE)
 summary(sums$FMT)
 #compare shannon, invsimpson, and sobs (# 'species')
 	# comparison of FMT v. no FMT, as a whole:
@@ -459,7 +459,6 @@ The graph above measures the similarity between each of the groups on each parti
 # let's also look at how each of the groups changes over time:
 	# mFMT group:
 mFMT<-m2[m2$FMT_s1==c("mFMT") & m2$FMT_s2==c("mFMT"), ]		# select only one group to compare
-test<-mFMT[mFMT$sampleID_s1== mFMT$sampleID_s2, ]		# select only between the same mouse
 	# must do this for each time comparison:
 t1A<-mFMT[mFMT$day_s1==c("-7") & mFMT$day_s2==c("1"), ]
 t1B<-mFMT[mFMT$day_s1==c("1") & mFMT$day_s2==c("-7"), ]
