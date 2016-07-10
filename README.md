@@ -60,6 +60,18 @@ With that, let's get started on looking at our data!
 
 ###Part I: Taxonomic classification
 
+We will be using a subset of sequence data generated from a mouse model of recurrent *Clostridium difficile* infection (CDI). The working data set contains sequences from samples collected at days -7, 1, 4, 11, and 19. The [metadata.txt](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt) file contains detailed information about each sample collected. Take a look at the figure illustrating the study design:
+
+![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/relapse_timeline.png)
+
+> What types of questions can we ask using the data we have available?
+
+Before we get started, let's think of a question or hypothesis to ask.
+
+> Example Hypothesis: FMT increases the fecal microbiota diversity following recurrent CDI.
+
+There are many questions and hypotheses that we can formulate. Look at the [metadata.txt](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt) file for more information. Feel free to come up with your own for this exercise!
+
 In our presentation, we discussed how sequences within your samples can be taxonomically classified based on the sequence identity (phylotyping). Depending on the level of classification, samples may appear more or less similar to each other. Let's take a look at some of the samples we have previously processed in mothur. We will not be going over every part of the code, but a full description of the steps taken to create the files used here can be found in the [phylotyping.R](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/Rcode/phylotyping.R) file. 
 
 First, let's take a look at the file produced by mothur from the step in taxonomic classification. You can do this by typing in the following commands in the console section of RStudio:
@@ -102,7 +114,9 @@ summary(as.factor(bar$day))
 
 Take a look at the newly created file.
 > What does this new file tell you that the old one did not?
+
 > What kind of meta data is included in our files?
+
 > Take a couple of minutes and look at the possible comparisons you could make based on this information.
 
 Hopefully you see that this is a more informative file! Let's make a graph. Copy/paste the following in your console:
@@ -297,6 +311,7 @@ legend("topleft", c("noFMT", "mFMT"), col=c("gold", "chartreuse3"), cex=0.8, pch
 ![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/alphadiv_overtime.png)
 
 > What does the data look like now? 
+
 > Does diversity tell us about community membership or similarity to each other at all?
 
 ####Part III: Beta diversity
@@ -451,6 +466,7 @@ text(x =  seq(1,5,by=1), y = par("usr")[3]-0.03, srt = 45, adj = 1, labels = c("
 ![alt tag](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/figures/beta_pairwise.groups.png)
 
 > What does this graph display?
+
 > What comparisons are being made?
 
 The graph above measures the similarity between each of the groups on each particular day. Another way to look at the data is to compare changes within the group over time, and whether one group appears to be changing more than the other. Let's make that comparison:
@@ -545,7 +561,10 @@ As you can see, there are many ways to make pairwise comparisons. When you are a
 
 Some last questions to consider:
 > What type of information did each of these analyses provide?
+
 > How did these analyses differ from each other?
+
+> Based on the data, would you reject or accept the hypothesis we originally formulated?
 
 We hope that this short exercise gave you a better understanding of how microbiome data is interpreted and handled. If this was overwhelming, do not be intimidated! Learning how to process this data can be a long journey, but there are multiple free online tutorials and courses. Programming is not only useful for 16S rRNA analysis, but for any large -omics datasets.
 
