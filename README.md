@@ -10,9 +10,9 @@ Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Lau
 - Alpha diversity within each community
 - Beta diversity between communities
 
-###Getting started
+### Getting started
 
-####R and RStudio
+#### R and RStudio
 
 We will be using [R](https://www.r-project.org/) to re-generate some of these analyses. To interact with R easily, please make sure that you have downloaded [RStudio](https://www.rstudio.com/). 
 
@@ -22,22 +22,22 @@ We will be using [R](https://www.r-project.org/) to re-generate some of these an
 
 **_Linux:_** The binary files for your distribution can be found at [CRAN](http://cran.r-project.org/index.html). You can also use your own package manager: for Debian/Ubuntu run ```sudo apt-get install r-base``` and for Fedora run ```sudo yum install R``` . The RStudio IDE can be found [here](https://www.rstudio.com/products/rstudio/download/). 
 
-####Text Editor
+#### Text Editor
 
 While not required for this workshop, we recommend downloading some type of text editor to easily visualize your code. TextNano is a basic editor, and can be installed on Windows from the [Software Carpentry Windows Installer](https://github.com/swcarpentry/windows-installer/releases/download/v0.3/SWCarpentryInstaller.exe). Nano should be pre-installed on both Mac OS X and Linux. If you are using Mac OS X, you could also download [Text Wrangler](http://www.barebones.com/products/textwrangler/).
 
-####Downloading the files
+#### Downloading the files
 
 All of the files used in this exercise can be downloaded from this github directory. Use the green 'Clone or Download' button on the topright to download all the files. 
 
-#####Directory/file descriptions
+##### Directory/file descriptions
 - [mothur-generated files](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/mothurfiles)
 - [data files modified in R](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/datafiles)
 - [code](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/Rcode)
 - [metadata](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt)
 - [figures](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/figures)
 
-####Start the session
+#### Start the session
 
 We will be using RStudio to interact with R to work with the data. Since we do not have enough time to comprehensively go through all of the steps, we have already created all of the files for you in the described directories above. The goal of this session is to introduce you to 16S data and get you comfortable with the type of data files you might receive after processing your data. Do not be scared! At the end of the session, we will provide you with links to useful sites that you can explore on your own. You should be able to copy/paste the commands as we go through them. Additionally, we hope that this exercise reinforces some of the concepts we discussed earlier in the workshop. 
 
@@ -58,7 +58,7 @@ If you are not familiar with RStudio, a video tutorial on the different parts ca
 
 With that, let's get started on looking at our data!
 
-###Part I: Taxonomic classification
+### Part I: Taxonomic classification
 
 We will be using a subset of sequence data generated from a mouse model of recurrent *Clostridium difficile* infection (CDI). The working data set contains sequences from samples collected at days -7, 1, 4, 11, and 19. The [metadata.txt](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt) file contains detailed information about each sample collected. Take a look at the figure illustrating the study design:
 
@@ -216,7 +216,7 @@ legend(13,100,legend=rownames(bar_g),col=col.gen,fill=col.gen,cex=0.5)
 
 > Compare this genus-level graph to the simplified phylum-level graph. Do they look the same?
 
-###Part II: Alpha diversity
+### Part II: Alpha diversity
 
 We discussed alpha diversity earlier in the workshop as a measure of the diversity of a community or population within an ecosystem. Alpha diversity takes into consideration the richness (number of 'species') and the evenness of the community. There are many equations we can use to look at the alpha diversity within a microbial community. In this section, we will explore some of those measures, and how they differ. 
 
@@ -314,7 +314,7 @@ legend("topleft", c("noFMT", "mFMT"), col=c("gold", "chartreuse3"), cex=0.8, pch
 
 > Does diversity tell us about community membership or similarity to each other at all?
 
-####Part III: Beta diversity
+#### Part III: Beta diversity
 
 Alpha diversity is a useful measure of comparison to calculate the species richness within a community. However, just because two communities have similar diversities does not mean that the same types of community members are shared between those communities. Beta diversity describes the similarity between communities, generally using pairwise comparisons across the data set.
 
@@ -557,7 +557,7 @@ axis(1, at=x+0.125, labels=c("d-7 to d1", "d1 to d4", "d4 to d11", "d11 to d19")
 
 As you can see, there are many ways to make pairwise comparisons. When you are analyzing your data, think about your main question, and how that can best be answered. Of course, for some of us, data exploration is a way of life. We encourage you to explore your data in many ways--each of these 'experiments' can give you a different piece of information that can be useful in guiding you to the next big question. 
 
-####Conclusions
+#### Conclusions
 
 Some last questions to consider:
 > What type of information did each of these analyses provide?
