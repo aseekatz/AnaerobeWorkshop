@@ -12,9 +12,39 @@ This portion of the workshop will give you a brief introduction to looking at 16
 - Alpha diversity within each community
 - Beta diversity between communities
 
-###------####
+---
 
-### Getting started
+## Schedule:
+
+8:30 – 9AM:  REGISTRATION / HELP SET-UP
+
+9 – 10AM:   Intro
+- Casey: Microbiome in health and disease
+- Laurie – Microbiome in extra-intestinal diseases
+- Anna - Microbiome study design
+
+10 – 10:15AM:  BREAK / HELP SET-UP
+
+10:15AM – 12PM:   16S rRNA Practical data analysis  (Anna)
+
+12 – 1PM  LUNCH
+
+1 – 2:45PM:   16S rRNA Interactive Session, Testing Hypotheses  (Anna; + Laurie / Casey)
+
+2:45 – 3PM:  BREAK
+
+3:00 – 3:45PM:   Metabolomics  (Casey)
+
+3:45 – 4:30PM:  Beyond 16S:  Where do we go from here? (Laurie/Casey)
+- Laurie: Culturing the microbiota
+- Laurie: Beyond bacteria
+- Casey: Clinical promise and emerging microbiome therapeutics
+
+4:00 – 4:30PM:   Wrap-up and Q&A
+
+---
+
+## Getting started
 
 #### R and RStudio
 
@@ -62,7 +92,7 @@ If you are not familiar with RStudio, a video tutorial on the different parts ca
 
 With that, let's get started on looking at our data!
 
-###-----###
+---
 
 ## Part I: Processing your sequence data
 
@@ -155,11 +185,11 @@ Let's take a look at some of these files. If you have already downloaded this fo
 - you can use these two types of files (mainly the OTU count table) to generate different summary statistics:
 	- [anaerobe.final.groups.summary](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.groups.summary) shows different alpha diversity calculations per sample. If you have a [metadata file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt), you can generate plots to compare different sample types
 	- [anaerobe.final.summary_modified.txt](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.summary_modified.txt) shows different beta diversity calculations. All of these values are pairwise calculations based on different similarity measures (i.e., Bray-Curtis, Yue & Clayton, Shannon-Jensen, etc), and give you a numerical value for how similar one sample is to another. 
-	- Using the beta diversity calculations above, you can also directly calculate Principal Coordinates of Analysis ([PCoA](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.thetayc.0.03.lt.pcoa.axes)) or Numerical Multi-Dimensional Scaling ([NMDS](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.thetayc.0.03.lt.nmds.axes)) values to plot your samples against each other. These types of measurements are ways to visualize multidimensional data. 
+	- Using the beta diversity calculations above, you can also directly calculate Principal Coordinates of Analysis ([PCoA](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.thetayc.0.03.lt.pcoa.axes)) or Nonmetric Dimensional Scaling ([NMDS](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.thetayc.0.03.lt.nmds.axes)) values to plot your samples against each other. These types of measurements are ways to visualize multidimensional data. 
 	
 For the second part of this tutorial, we will be using these files to generate plots to compare our samples. 
 
-###-----###
+---
 
 ## Part II:
 
