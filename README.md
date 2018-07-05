@@ -232,7 +232,7 @@ Now, if you click on tax2, you should notice that it is a much smaller file. In 
 
 > Can you compare these numbers for each sample in its current form? Why or why not?
 
-There are a couple integral steps we need to take before we can make sense of this. We probably want to normalize the data somehow, eliminate some of the data based on a defined cutoff, and add sample information to the sampleIDs. The full code to do this can be viewed in the phylotyping.R file. To save some time, we have already created a file that has this information.
+There are a couple integral steps we need to take before we can make sense of this. We probably want to normalize the data somehow, eliminate some of the data based on a defined cutoff, and add sample information to the sampleIDs. The full code to do this can be viewed in the [phylotyping.R file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/Rcode/phylotyping.R). To save some time, we have already created a [file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/anaerobe_phyla1p_w.meta.txt) that has this information.
 
 Copy/paste the following to view the file we are interested in:
 
@@ -304,7 +304,7 @@ You should now have a graph that looks like this:
 
 > Did this make the data more interpretable? What does the data tell us now?
 
-Thus far, we have only looked at our data at the phylum level, which is fairly broad. Our original file created in mothur contains deeper taxonomic levels (taxlevel=6 is the genus-level). Let's take a look at the genus-level breakdown of our data:
+Thus far, we have only looked at our data at the phylum level, which is fairly broad. Our original file created in mothur contains deeper taxonomic levels (taxlevel=6 is the genus-level). Let's take a look at the [genus-level](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/anaerobe_genfrac1p_w.meta.txt) breakdown of our data:
 
 ```
 bar<-read.table(file="datafiles/anaerobe_genfrac1p_w.meta.txt", header=TRUE)
@@ -355,7 +355,7 @@ legend(13,100,legend=rownames(bar_g),col=col.gen,fill=col.gen,cex=0.5)
 
 We discussed alpha diversity earlier in the workshop as a measure of the diversity of a community or population within an ecosystem. Alpha diversity takes into consideration the richness (number of 'species') and the evenness of the community. There are many equations we can use to look at the alpha diversity within a microbial community. In this section, we will explore some of those measures, and how they differ. 
 
-In mothur, we created several different files that describe the community (some of these fall into the beta diversity category, described in Part III). Although we will be using a file already created for you, let's take alook at the format of some of the files created in mothur.
+In mothur, we created several different files that describe the community (some of these fall into the beta diversity category, described in the third section of this part). Although we will be using a file already created for you, let's take alook at the format of some of the files created in mothur.
 
 ```
 meta<-read.table(file="datafiles/metadata.txt", header=TRUE)
@@ -371,7 +371,7 @@ taxonomy<-read.table(file="mothurfiles/anaerobe.final.0.03.cons.taxonomy", heade
 > What is the difference between the phylotype file in the first exercise and the .shared file above?
 > What does the 'taxonomy' file tell us?
 
-We have combined some of these pieces of information for you below (the full code can be viewed in the file alpha_diversity.R). Take a look at the combined data file below, and let's look at our first alpha diversity measure, the inverse Simpson index:
+We have combined some of these pieces of information for you below (the full code can be viewed in the file [alpha_diversity.R](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/Rcode/alpha_diversity.R)). Take a look at the combined [data file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/anaerobe_summary.txt) below, and let's look at our first alpha diversity measure, the inverse Simpson index:
 
 ```
 sums<-read.table(file="datafiles/anaerobe_summary.txt", header=TRUE)
@@ -455,7 +455,7 @@ Alpha diversity is a useful measure of comparison to calculate the species richn
 
 In part II, we combined some of this information by calculating the Principal Coordinates Analysis (PCOA) and Non-metric Dimensional Scaling (NMDS) axes. Briefly, both of these multi-dimensional ordination analyses take the calculated pairwise distances, and flatten them into a 2D axis we can view. PCOA will generate as many axes as you have samples, with each consecutive axis contributing less. The loadings file shows the % variance explained by each axis. NMDS collapses all of the information (i.e., considers all of the OTUs or species differences between the samples) into an ordination you can visualize, using rank-order. 
 
-Let's compare how PCOA and NMDS differ using the same distance calculator, the Yue and Clayton theta measure of dissimilarity (theta yc). Copy/paste the following commands, taking a look at the files and figure generated:
+Let's compare how PCOA and NMDS differ using the same distance calculator, the Yue and Clayton theta measure of dissimilarity (theta yc). Copy/paste the following commands, taking a look at the [files](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/anaerobe_summary.txt) and figure generated:
 
 ```
 # read in file from last exercise:
@@ -569,7 +569,7 @@ plot(jest_pcoa_axis2 ~ jest_pcoa_axis1, data=sums, col=group2.col(sums$day), pch
 > Does the type of distance metric used give you a different answer?
 > What are some of the main differences between these calculators?
 
-Ordination is one way to visualize potential similarities within a data set. We can also directly compare the pairwise distances. In mothur, we calculated a distance matrix of pairwise similarities using different types of distance metrics. Take a look at the (modified) file generated in mothur:
+Ordination is one way to visualize potential similarities within a data set. We can also directly compare the pairwise distances. In mothur, we calculated a distance matrix of pairwise similarities using different types of distance metrics. Take a look at the (modified) [file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.summary_modified.txt) generated in mothur:
 
 ```
 pairwise.dist<-read.table(file="mothurfiles/anaerobe.final.summary_modified.txt", header=TRUE)
@@ -579,7 +579,7 @@ head(pairwise.dist)
 
 > What information is displayed in this file?
 
-Let's do a couple comparisons between the groups. We have previously created this file for you, but you can view the full code to create this file in the beta_diversity.R file. Read in the following file, and let's parse out the comparisons we want:
+Let's do a couple comparisons between the groups. We have previously created this file for you, but you can view the full code to create this file in the beta_diversity.R file. Read in the following [file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/anaerobe_all.dist.txt), and let's parse out the comparisons we want:
 
 ```
 m2<-read.table(file="datafiles/anaerobe_all.dist.txt", header=TRUE)
