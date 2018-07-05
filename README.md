@@ -2,13 +2,17 @@
 
 Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
 
-**_Date:_** July 11, 2016
+**_Date:_** July 9, 2018 (updated from 1st workshop on July 11, 2016)
 
-**_Description:_** This portion of the workshop will give you a brief introduction to looking at 16S rRNA data output. While we do not have time to go over how the sequencing data is processed, several free tools are available for data processing. The data we will use in this workshop have been processed using the software [mothur](http://www.mothur.org/). A full batch file of the commands used to process the data files used to produce the data in this workshop are described in the file mbatch_anaerobe.txt. Another software pipeline used to process 16S rRNA data is [QIIME](http://qiime.org/). We encourage you to check out the documentation and tutorials available for both as a first step in your data analysis. We will be looking at the files used to generate the following analyses and figures:
+**_Description:_** 
+
+This portion of the workshop will give you a brief introduction to looking at 16S rRNA data output. The goal of this interactive portion is to familiarize you with 16S rRNA files and types of analyses. **Part I** will cover some aspects of sequence data processing. While we do not have time to go over a step-by-step tutorial on how data is processed, we will look at some data files throughout the process. We also provide links to some of the commonly used tools to process sequencing data. **Part II** will cover some basic aspects of data analysis. We will use R Studio to analyze some of the processed files mentioned in Part I. We encourage you to check out the documentation and tutorials available for both as a first step in your data analysis. We will be looking at the files used to generate the following analyses and figures:
 
 - Genus-level classification of the microbial community in each sample
 - Alpha diversity within each community
 - Beta diversity between communities
+
+###------####
 
 ### Getting started
 
@@ -58,7 +62,108 @@ If you are not familiar with RStudio, a video tutorial on the different parts ca
 
 With that, let's get started on looking at our data!
 
-### Part I: Taxonomic classification
+###-----###
+
+## Part I: Processing your sequence data
+
+This section is meant to follow alongside the lecture on 16S rRNA gene-based sequence processing. While we will not be processing sequence data in real time, we want to 1) share some resources for you to explore on your own and 2) take a look at some of the data files that you will be working with. 
+
+### 1. Resources for processing and analyzing your data 
+
+There are several open-source, free programs that you can use to process and analyze your data. The best news is that these resources also have great documentation to guide you! Many of the programs also incorporate the same tools that are widely used in analysis of microbial communities. The resources below are commonly used tools in 16S rRNA gene-based analyses:
+
+- [mothur](http://www.mothur.org/) is a free, open-source software package developed by Dr. Patrick Schloss at the University of Michigan. Commonly used algorithms, bioinformatic tools, and community calculators are incorporated into mothur (and if it is missing, just email mothur to ask to add it!). You can follow a full MiSeq SOP [here](https://mothur.org/wiki/MiSeq_SOP). Dr. Schloss also teaches multiple 2-3 day workshops if you are interested in having a more hands-on tutorial. We will be using files processed in mothur for Part II of this workshop.
+- [QIIME2](https://qiime2.org/) (which has succeeded QIIME) is a free, open-source bioinformatics platform initially developed by the Knight (University of California, San Diego) and Caporaso (Northern Arizona University) labs. QIIME2 has online documentation to get you started on processing and analyzing your data, and has also incorporated visualization of your data as part of the output. 
+- [DADA2](https://benjjneb.github.io/dada2/index.html) is another pipeline that can be used to process and analyze your data. As opposed to clustering your sequences into Operational Taxonomic Units (OTUs), a commonly used method in microbial community analysis to represent species-level composition, DADA2 produces Amplicon Sequence Variants (ASVs), producing a count of exact sequence matches of your data. 
+
+We encourage you to check out the documentation and tutorials available to see which program fits your needs. For the purposes of this workshop, we will focus on using R Studio to analyze data files processed using mothur.
+
+### 2. Processing your sequence data
+
+In general, you will need to use the sequence and quality information in a fastq file to filter out erroneous / bad quality sequences. You will also have to align your sequences to the 16S rRNA region of interest, cluster into OTUs, and taxonomically classify sequences to get the sequence identity. Below is a sample list of commands used in mothur (a mothur [batchfile](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/mbatch_anaerobe.txt), included in this directory) to do each of these steps before we start inquiring the data:
+
+```
+##mbatch for samples used in Anaerobe class
+## 6.19.16
+
+make.contigs(file=anaerobe.files, processors=8)
+summary.seqs(fasta=anaerobe.trim.contigs.fasta, processors=8)
+screen.seqs(fasta=anaerobe.trim.contigs.fasta, group=anaerobe.contigs.groups, maxambig=0, maxlength=275, processors=8)
+unique.seqs(fasta=anaerobe.trim.contigs.good.fasta)
+count.seqs(name=anaerobe.trim.contigs.good.names, group=anaerobe.contigs.good.groups)
+summary.seqs(count=anaerobe.trim.contigs.good.count_table, processors=8)
+pcr.seqs(fasta=silva.seed_v119.align, start=11894, end=25319, keepdots=F, processors=8)
+system(mv silva.seed_v119.pcr.align silva.v4.fasta)
+summary.seqs(fasta=silva.v4.fasta, processors=8)
+align.seqs(fasta=anaerobe.trim.contigs.good.unique.fasta, reference=silva.v4.fasta, processors=8)
+summary.seqs(fasta=anaerobe.trim.contigs.good.unique.align, count=anaerobe.trim.contigs.good.count_table, processors=8)
+screen.seqs(fasta=anaerobe.trim.contigs.good.unique.align, count=anaerobe.trim.contigs.good.count_table, summary=anaerobe.trim.contigs.good.unique.summary, start=1968, end=11550, maxhomop=8, processors=8)
+summary.seqs(fasta=current, count=current, processors=8)
+filter.seqs(fasta=anaerobe.trim.contigs.good.unique.good.align, vertical=T, trump=., processors=8)
+unique.seqs(fasta=anaerobe.trim.contigs.good.unique.good.filter.fasta, count=anaerobe.trim.contigs.good.good.count_table)
+pre.cluster(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.count_table, diffs=2, processors=8)
+chimera.uchime(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.count_table, dereplicate=t, processors=8)
+remove.seqs(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.fasta, accnos=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.accnos)
+summary.seqs(fasta=current, count=current, processors=8)
+classify.seqs(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, reference=trainset10_082014.rdp.fasta, taxonomy=trainset10_082014.rdp.tax, cutoff=80)
+remove.lineage(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, taxonomy=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.taxonomy, taxon=Chloroplast-Mitochondria-unknown-Archaea-Eukaryota)
+count.seqs(name=current, group=current)
+count.groups(count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table)
+
+#remove.groups(count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta, taxonomy=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.taxonomy, groups=)
+	#if in the future you want to remove samples because they are too low (I usually cutoff any sample with < 1000 seqs), remember to modify the input files for the following commands
+	 #weird errors with count_file--will just remove these groups later--let's see if previous files work
+cluster.split(fasta=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta, count=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table, taxonomy=anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.taxonomy, splitmethod=classify, taxlevel=5, cutoff=0.15, processors=1)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.an.unique_list.list anaerobe.final.list)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta anaerobe.final.fasta)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.taxonomy anaerobe.final.taxonomy)
+system(mv anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.denovo.uchime.pick.count_table anaerobe.final.count_table)
+
+# for shared files:
+count.groups(count=anaerobe.final.count_table)
+make.shared(list=anaerobe.final.list, count=anaerobe.final.count_table, label=0.03)
+classify.otu(list=anaerobe.final.list, count=anaerobe.final.count_table, taxonomy=anaerobe.final.taxonomy, label=0.03)
+#remove.groups(count=anaerobe.final.count_table, fasta=anaerobe.final.fasta, taxonomy=anaerobe.final.taxonomy, list=anaerobe.final.list, shared=anaerobe.final.shared, groups=)
+
+## no subsampling results:
+dist.shared(shared=anaerobe.final.shared, calc=thetayc-jclass-jest-braycurtis)
+pcoa(phylip=anaerobe.final.thetayc.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.jclass.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.jest.0.03.lt.dist)
+pcoa(phylip=anaerobe.final.braycurtis.0.03.lt.dist)
+nmds(phylip=anaerobe.final.thetayc.0.03.lt.dist, mindim=3, maxdim=3)
+summary.shared(shared=anaerobe.final.shared, calc=sharedsobs-braycurtis-spearman-thetayc-jsd-sharednseqs)
+summary.single(shared=anaerobe.final.shared, calc=simpsoneven-simpson-invsimpson-shannon-npshannon-sobs-chao-nseqs)
+
+```
+
+The accompanying lecture will discuss each of these steps in more detail. On your own time, you can also check out the mothur [MiSeq SOP](https://www.mothur.org/wiki/MiSeq_SOP) for a more detailed explanation of each of these steps. The basic steps we will discuss include:
+
+- filtering sequences of inappropriate length, unaligned / ambiguous / homopolymeric / chimeric sequences
+- aligning sequences to a 16S rRNA database, such as the following databases (note that mothur, QIIME2, and DADA2 have these databases incorporated into their pipelines for your convenience):
+	- [SILVA](https://www.arb-silva.de/)
+	- [Greengenes](http://greengenes.secondgenome.com/)
+	- [RDP](https://rdp.cme.msu.edu/)
+- classifying your sequences using one of the above databases
+- clustering your sequences into OTUs, which represent a more species-level comparison (or, if using DADA2, creating ASVs)
+- calculating different summary statistics (alpha or beta diversity)
+
+Let's take a look at some of these files. If you have already downloaded this folder onto your computer, you can open up these files in excel or your favorite text file viewer. You can also view the files here (although the formatting will be a bit off):
+
+- [anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.tax.summary](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.tax.summary) is an example of a table that includes the taxonomic classification (at different taxonomic levels) of your sequence data. This file was generated by directly classifying the sequences against a 16S rRNA sequence database (in this case, using RDP). Notice that the 'taxlevel' column indicates the classification at different taxonomic levels. For instance, if you wanted to grab all the sequences at the phylum level, you would grab all rows with a taxlevel=2. If you wanted to grab the genus-level classifications, you would grab the rows where taxlevel=6. In mothur, you can also change the parameters of this command to be more strict or lenient, depending on your needs. 
+- [anaerobe.final.shared](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.shared) is an example of an OTU count table of the OTUs identified in this data set. Just like the phylotype file discussed above, these numbers represent raw counts of each OTU within each sample. Also notice that the numerical desgination of an OTU is arbitrary: if you analyze a different dataset, that dataset's OTU001 will not be the same as this dataset's OTU001. If you want to classify a representative OTU from each OTU cluster, you can do this in mothur as well, generating [this file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.0.03.cons.taxonomy).
+- you can use these two types of files (mainly the OTU count table) to generate different summary statistics:
+	- [anaerobe.final.groups.summary](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.groups.summary) shows different alpha diversity calculations per sample. If you have a [metadata file](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt), you can generate plots to compare different sample types
+	- [anaerobe.final.summary_modified.txt](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.summary_modified.txt) shows different beta diversity calculations. All of these values are pairwise calculations based on different similarity measures (i.e., Bray-Curtis, Yue & Clayton, Shannon-Jensen, etc), and give you a numerical value for how similar one sample is to another. 
+	- Using the beta diversity calculations above, you can also directly calculate Principal Coordinates of Analysis ([PCoA](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.thetayc.0.03.lt.pcoa.axes)) or Numerical Multi-Dimensional Scaling ([NMDS](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/anaerobe.final.thetayc.0.03.lt.nmds.axes)) values to plot your samples against each other. These types of measurements are ways to visualize multidimensional data. 
+	
+For the second part of this tutorial, we will be using these files to generate plots to compare our samples. 
+
+###-----###
+
+## Part II:
+
+### 1. Taxonomic classification
 
 We will be using a subset of sequence data generated from a mouse model of recurrent *Clostridium difficile* infection (CDI). The working data set contains sequences from samples collected at days -7, 1, 4, 11, and 19. The [metadata.txt](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt) file contains detailed information about each sample collected. Take a look at the figure illustrating the study design:
 
@@ -216,7 +321,7 @@ legend(13,100,legend=rownames(bar_g),col=col.gen,fill=col.gen,cex=0.5)
 
 > Compare this genus-level graph to the simplified phylum-level graph. Do they look the same?
 
-### Part II: Alpha diversity
+### 2. Alpha diversity
 
 We discussed alpha diversity earlier in the workshop as a measure of the diversity of a community or population within an ecosystem. Alpha diversity takes into consideration the richness (number of 'species') and the evenness of the community. There are many equations we can use to look at the alpha diversity within a microbial community. In this section, we will explore some of those measures, and how they differ. 
 
@@ -314,7 +419,7 @@ legend("topleft", c("noFMT", "mFMT"), col=c("gold", "chartreuse3"), cex=0.8, pch
 
 > Does diversity tell us about community membership or similarity to each other at all?
 
-#### Part III: Beta diversity
+#### 3. Beta diversity
 
 Alpha diversity is a useful measure of comparison to calculate the species richness within a community. However, just because two communities have similar diversities does not mean that the same types of community members are shared between those communities. Beta diversity describes the similarity between communities, generally using pairwise comparisons across the data set.
 
@@ -557,7 +662,7 @@ axis(1, at=x+0.125, labels=c("d-7 to d1", "d1 to d4", "d4 to d11", "d11 to d19")
 
 As you can see, there are many ways to make pairwise comparisons. When you are analyzing your data, think about your main question, and how that can best be answered. Of course, for some of us, data exploration is a way of life. We encourage you to explore your data in many ways--each of these 'experiments' can give you a different piece of information that can be useful in guiding you to the next big question. 
 
-#### Conclusions
+### 4. Conclusions
 
 Some last questions to consider:
 > What type of information did each of these analyses provide?
