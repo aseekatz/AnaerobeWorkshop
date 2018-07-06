@@ -16,31 +16,27 @@ This portion of the workshop will give you a brief introduction to looking at 16
 
 ## Schedule:
 
-8:30 – 9AM:  REGISTRATION / HELP SET-UP
+8:30 – 9AM:  REGISTRATION / INSTALLATION SET-UP
 
-9 – 10AM:   Intro
-- Casey: Microbiome in health and disease
-- Laurie – Microbiome in extra-intestinal diseases
-- Anna - Microbiome study design
+9 – 10AM:   Microbiome in Health and Disease
 
-10 – 10:15AM:  BREAK / HELP SET-UP
+10 – 10:15AM:  BREAK / INSTALLATION SET-UP
 
-10:15AM – 12PM:   16S rRNA Practical data analysis  (Anna)
+10:15AM – 11:30AM:  Concepts in Microbiome Studies: 16S rRNA rRNA Study Design and Analysis
+
+11:30AM – 12:00PM:  Culturing the Microbiome
 
 12 – 1PM  LUNCH
 
-1 – 2:45PM:   16S rRNA Interactive Session, Testing Hypotheses  (Anna; + Laurie / Casey)
+1 – 2:45PM:   16S rRNA Interactive Session: Using R to Analyze Your Data
 
 2:45 – 3PM:  BREAK
 
-3:00 – 3:45PM:   Metabolomics  (Casey)
+3:00 – 3:45PM:   Metabolomics
 
-3:45 – 4:30PM:  Beyond 16S:  Where do we go from here? (Laurie/Casey)
-- Laurie: Culturing the microbiota
-- Laurie: Beyond bacteria
-- Casey: Clinical promise and emerging microbiome therapeutics
+3:45 – 4:30PM:  Clinical Promise and Emerging Microbiome Therapeutics
 
-4:00 – 4:30PM:   Wrap-up and Q&A
+4:00 – 5:00PM:   Wrap-up and Q&A
 
 ---
 
