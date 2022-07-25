@@ -127,6 +127,7 @@ Before we start analyzing, let's organize our workspace into one location. In RS
 	- this way, you can call out the same relative paths in this tutorial (example: mothurfiles/filename)
 
 Let's also start a scripting file for you to save your work in. This will also be saved within your project directory (you will be copying/pasting into this script from the github instructions). Alternately, you can download this README.md file and save it in your project directory and open it:
+
 **_Make your own R script:_**
 - Click on the '+' file in the upper left hand corner of RStudio, and choose 'R script'
 - Click 'save' under File, and save your .R file as something meaningful
