@@ -131,7 +131,7 @@ Let's also start a scripting file for you to save your work in. This will also b
 **_Make your own R script:_**
 - Click on the '+' file in the upper left hand corner of RStudio, and choose 'R script'
 - Click 'save' under File, and save your .R file as something meaningful
-	- now, anytime you save on this file, you will also save all comments/code, 
+	- now, anytime you save on this file, you will also save your code and comments
 
 You will be working from this folder for this tutorial. With that, let's get started on looking at our data!
 
@@ -753,9 +753,15 @@ Some last questions to consider:
 We hope that this short exercise gave you a better understanding of how microbiome data is interpreted and handled. If this was overwhelming, do not be intimidated! Learning how to process this data can be a long journey, but there are multiple free online tutorials and courses. Programming is not only useful for 16S rRNA analysis, but for any large -omics datasets.
 
 #####Helpful websites:
-- **[Software Carpentry](http://software-carpentry.org/)** provides free workshops and tutorials around the world. While they do host onsite workshops, many of them can be accessed live online. Check them out!
-- **[Coursera](https://www.coursera.org/)** offers multiple online courses on data analysis and programming, such as learning R or Python. 
-- [Dr. Patrick Schloss](http://www.schlosslab.org/) at the University of Michigan offers in-person workshops on both **[mothur and R](http://www.mothur.org/wiki/Workshops)**. If you are planning on using mothur, this course is particularly helpful in understanding your data.
+- This tutorial used mostly base R commands to visualize and analyze the processed sequencing data. However, the power of R is quite endless. I highly recommend learning the following packages to imrpove your data analysis and visualization skills:
+	- **[tidyr](https://tidyr.tidyverse.org/)** cleans up messy data and makes it more reproducible. Learning how to properly record and store data will make your coding life easier
+	- **[ggplot2](https://ggplot2.tidyverse.org/)** is one of the more common ways to graph / visualize data in R. 
+- - **[Software Carpentry](http://software-carpentry.org/)** provides free workshops and tutorials around the world. While they do host onsite workshops, most of them should be available online. The [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) is particularly useful for microbiome analysis. This tutorial will walk you through installing and using R. Check them out!
+- [Dr. Patrick Schloss](http://www.schlosslab.org/) at the University of Michigan offers in-person workshops on both **[mothur and R](http://www.mothur.org/wiki/Workshops)**. Dr. Schloss's **[Riffomonas](https://riffomonas.org/)** classes list upcoming workshops and free training modules. I recommend the following:
+	- **[minimalR](https://riffomonas.org/minimalR/)**: learn to visualize microbiome data
+	- **[generalR](https://riffomonas.org/generalR/)**: learn how to generally use R
+	- **[Code Club](https://riffomonas.org/code_club/)**: Dr. Schloss has been posting weekly R lessons on YouTube--these lessons will make you a champion of R
+- **[Coursera](https://www.coursera.org/)** offers multiple online courses on data analysis and programming, such as learning R or Python. Some of these are free, whereas some of these are certificates / degrees. 
 
 
 
