@@ -1,42 +1,52 @@
 # Anaerobe Workshop
 
-Hands-on portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), and **[Dr. Anna Seekatz](https://sites.google.com/a/umich.edu/younglab/home)** (University of Michigan Medical School).
+Interactive portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), **[Dr. Anna Seekatz](https://www.clemson.edu/science/academics/departments/biosci/about/profiles/aseekat)** (Clemson University), and **Dr. Caroline Wasen** (Harvard Medical School).
 
-**_Date:_** July 9, 2018 (updated from 1st workshop on July 11, 2016)
+**_Date:_** July 28, 2022 (updated from 2nd workshop on July 9, 2018)
 
 **_Description:_** 
 
-This portion of the workshop will give you a brief introduction to looking at 16S rRNA data output. The goal of this interactive portion is to familiarize you with 16S rRNA files and types of analyses. **Part I** will cover some aspects of sequence data processing. While we do not have time to go over a step-by-step tutorial on how data is processed, we will look at some data files throughout the process. We also provide links to some of the commonly used tools to process sequencing data. **Part II** will cover some basic aspects of data analysis. We will use R Studio to analyze some of the processed files mentioned in Part I. We encourage you to check out the documentation and tutorials available for both as a first step in your data analysis. We will be looking at the files used to generate the following analyses and figures:
+The goal of the interactive portion is to familiarize you with 16S rRNA gene-based analyses (i.e., microbiome analysis). Specifically, we will:
+- discuss sequence data processing*
+- familiarize you with data output files
+- interactively discuss/conduct microbiome analyses
+	-  Genus-level classification of the microbial community in each sample
+	-  Alpha diversity within each community
+	-  Beta diversity between communities
+- introduce you to resources to learn microbiota analyses
 
-- Genus-level classification of the microbial community in each sample
-- Alpha diversity within each community
-- Beta diversity between communities
+After this course, you should be able to:
+- know what to consider in microbiome study design
+- generally know what different types of analyses / methods tell you about the microbiome
+- know where to go for more resources to learn microbiome analyses
 
 ---
 
 ## Schedule:
 
-8:30 – 9AM:  REGISTRATION / INSTALLATION SET-UP
+8:30 – 9:00AM:  	REGISTRATION / INSTALLATION SET-UP
 
-9 – 10AM:   Microbiome in Health and Disease
+9:00 – 9:15AM:   	Introductions / Course overview
 
-10 – 10:15AM:  BREAK / INSTALLATION SET-UP
+9:15 – 10:15AM: 	Introduction to Microbiome Study Design (Laurie)
 
-10:15AM – 11:30AM:  Concepts in Microbiome Studies: 16S rRNA rRNA Study Design and Analysis
+10:15 - 10:30AM:	Integration of Culture-based Techniques into Microbiome Studies (Caroline)
 
-11:30AM – 12:00PM:  Culturing the Microbiome
+10:30 - 10:45AM:	BREAK / INSTALLATION SET-UP
 
-12 – 1PM  LUNCH
+10:45 - 12:00PM:	Metabolomics 
 
-1 – 2:45PM:   16S rRNA Interactive Session: Using R to Analyze Your Data
+12:00 – 1:00PM:  	LUNCH
 
-2:45 – 3PM:  BREAK
+1:00 – 1:45PM:   	Overview of Microbiome Approaches (data processing; analysis)
 
-3:00 – 3:45PM:   Metabolomics
+1:45 - 3:00PM:		Interactive 16S rRNA gene-based analyses: Using R to analyze data
 
-3:45 – 4:30PM:  Clinical Promise and Emerging Microbiome Therapeutics
+3:00 – 3:15PM:  	BREAK
 
-4:00 – 5:00PM:   Wrap-up and Q&A
+3:15 – 4:30PM:   	Continued Data Analysis
+
+4:30 – 5:00PM:  	Wrap-up and Q&A
 
 ---
 
@@ -44,17 +54,41 @@ This portion of the workshop will give you a brief introduction to looking at 16
 
 #### R and RStudio
 
-We will be using [R](https://www.r-project.org/) to re-generate some of these analyses. To interact with R easily, please make sure that you have downloaded [RStudio](https://www.rstudio.com/). 
+We will be using [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/) to re-generate common microbiota analyses based on an existing data set. You will need to install R before downloading RStudio.
 
-**_Windows:_** Run and download R using [this .exe file](https://cran.r-project.org/bin/windows/base/release.htm) from [CRAN](https://cran.r-project.org/index.html). Download the RStudio IDE [here](https://www.rstudio.com/products/rstudio/download/).
+These download directions are adapted from [Data Carpentry](https://datacarpentry.org/R-ecology-lesson/index.html), a great resource for learning R to conduct ecological analyses (more details listed at the bottom of this page).
 
-**_Mac OS X:_** Install R using [this .pkg file](http://cran.r-project.org/bin/macosx/R-latest.pkg), and install the [RStudio IDE](http://www.rstudio.com/ide/download/desktop).
+To download R and RStudio:
 
-**_Linux:_** The binary files for your distribution can be found at [CRAN](http://cran.r-project.org/index.html). You can also use your own package manager: for Debian/Ubuntu run ```sudo apt-get install r-base``` and for Fedora run ```sudo yum install R``` . The RStudio IDE can be found [here](https://www.rstudio.com/products/rstudio/download/). 
+**_Windows:_**
+- Download R from the [CRAN website](https://cran.r-project.org/bin/windows/base/release.htm)
+- Run the .exe file that was just downloaded
+
+- Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+	- Under All Installers, download the RStudio Installer for Windows.
+	- Double click the file to install it
+	- Once it’s installed, open RStudio to make sure it works and you don’t get any error messages
+
+**_MacOS:_**
+- Download R from the [CRAN website](https://cran.r-project.org/bin/macosx/)
+- Select the .pkg file for the latest R version
+- Double click on the downloaded file to install R
+- It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed by some packages)
+
+- Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+	- Under All Installers, download the RStudio Installer for MacOS.
+	- Double click the file to install RStudio
+	- Once it’s installed, open RStudio to make sure it works and you don’t get any error messages
+
+**_Linux:_**
+- Follow the instructions for your system on the [CRAN website](https://cloud.r-project.org/bin/linux) and make sure you have at least R 3.3.1.
+- Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+- Under All Installers, select the version that matches your distribution and install it with your preferred method (e.g., with Debian/Ubuntu sudo dpkg -i rstudio-YYYY.MM.X-ZZZ-amd64.deb at the terminal).
+- Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.
 
 #### Text Editor
 
-While not required for this workshop, we recommend downloading some type of text editor to easily visualize your code. TextNano is a basic editor, and can be installed on Windows from the [Software Carpentry Windows Installer](https://github.com/swcarpentry/windows-installer/releases/download/v0.3/SWCarpentryInstaller.exe). Nano should be pre-installed on both Mac OS X and Linux. If you are using Mac OS X, you could also download [Text Wrangler](http://www.barebones.com/products/textwrangler/).
+While not required for this workshop, we recommend downloading some type of text editor to easily visualize your code. [Sublime Text](https://www.sublimetext.com/) is a basic editor and can be installed on Windows or MacOS. Nano should be pre-installed on both Mac OS X and Linux. If you are using MacOS X, you could also download [BBEdit](https://www.barebones.com/products/bbedit/).
 
 #### Downloading the files
 
