@@ -752,7 +752,10 @@ Some last questions to consider:
 
 We hope that this short exercise gave you a better understanding of how microbiome data is interpreted and handled. If this was overwhelming, do not be intimidated! Learning how to process this data can be a long journey, but there are multiple free online tutorials and courses. Programming is not only useful for 16S rRNA analysis, but for any large -omics datasets.
 
-#####Helpful websites:
+---
+
+## Additional resources to learn R and microbiome-related data analysis:
+
 - This tutorial used mostly base R commands to visualize and analyze the processed sequencing data. However, the power of R is quite endless. I highly recommend learning the following packages to imrpove your data analysis and visualization skills:
 	- **[tidyr](https://tidyr.tidyverse.org/)** cleans up messy data and makes it more reproducible. Learning how to properly record and store data will make your coding life easier
 	- **[ggplot2](https://ggplot2.tidyverse.org/)** is one of the more common ways to graph / visualize data in R. 
