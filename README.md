@@ -1,18 +1,18 @@
 # Anaerobe Workshop
 
-Interactive portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), **[Dr. Anna Seekatz](https://www.clemson.edu/science/academics/departments/biosci/about/profiles/aseekat)** (Clemson University), and **Dr. Caroline Wasen** (Harvard Medical School).
+Interactive portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), **[Dr. Anna Seekatz](https://www.clemson.edu/science/academics/departments/biosci/about/profiles/aseekat)** (Clemson University), and **Dr. Caroline Wasén** (Harvard Medical School).
 
 **_Date:_** July 28, 2022 (updated from 2nd workshop on July 9, 2018)
 
 **_Description:_** 
 
 The goal of the interactive portion is to familiarize you with 16S rRNA gene-based analyses (i.e., microbiome analysis). Specifically, we will:
-- discuss sequence data processing*
+- discuss sequence data processing
 - familiarize you with data output files
 - interactively discuss/conduct microbiome analyses
-	-  Genus-level classification of the microbial community in each sample
-	-  Alpha diversity within each community
-	-  Beta diversity between communities
+	-  genus-level classification of the microbial community in each sample
+	-  alpha diversity within each community
+	-  beta diversity between communities
 - introduce you to resources to learn microbiota analyses
 
 After this course, you should be able to:
@@ -24,29 +24,29 @@ After this course, you should be able to:
 
 ## Schedule:
 
-8:30 – 9:00AM:  	REGISTRATION / INSTALLATION SET-UP
+8:30 – 9:00AM:  	   REGISTRATION / INSTALLATION SET-UP
 
-9:00 – 9:15AM:   	Introductions / Course overview
+9:00 – 9:15AM:   	   Introductions / Course overview
 
-9:15 – 10:15AM: 	Introduction to Microbiome Study Design (Laurie)
+9:15 – 10:15AM: 	   Introduction to Microbiome Study Design (Laurie)
 
-10:15 - 10:30AM:	Integration of Culture-based Techniques into Microbiome Studies (Caroline)
+10:15 - 10:30AM:	   Integration of Culture-based Techniques into Microbiome Studies (Caroline)
 
-10:30 - 10:45AM:	BREAK / INSTALLATION SET-UP
+10:30 - 10:45AM:	   BREAK / INSTALLATION SET-UP
 
-10:45 - 12:00PM:	Metabolomics 
+10:45 - 12:00PM:	   Metabolomics 
 
-12:00 – 1:00PM:  	LUNCH
+12:00 – 1:00PM:  	   LUNCH
 
-1:00 – 1:45PM:   	Overview of Microbiome Approaches (data processing; analysis)
+1:00 – 1:45PM:   	   Overview of Microbiome Approaches (data processing; analysis)
 
-1:45 - 3:00PM:		Interactive 16S rRNA gene-based analyses: Using R to analyze data
+1:45 - 3:00PM:		   Interactive 16S rRNA gene-based analyses: Using R to analyze data
 
-3:00 – 3:15PM:  	BREAK
+3:00 – 3:15PM:  	   BREAK
 
-3:15 – 4:30PM:   	Continued Data Analysis
+3:15 – 4:30PM:   	   Continued Data Analysis
 
-4:30 – 5:00PM:  	Wrap-up and Q&A
+4:30 – 5:00PM:  	   Wrap-up and Q&A
 
 ---
 
@@ -92,7 +92,7 @@ While not required for this workshop, we recommend downloading some type of text
 
 #### Downloading the files
 
-All of the files used in this exercise can be downloaded from this github directory. Use the green 'Clone or Download' button on the topright to download all the files. 
+All files used in this exercise can be downloaded from this github directory. Use the green 'Clone or Download' button on the topright to download all the files. 
 
 ##### Directory/file descriptions
 - [mothur-generated files](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/mothurfiles)
@@ -103,44 +103,58 @@ All of the files used in this exercise can be downloaded from this github direct
 
 #### Start the session
 
-We will be using RStudio to interact with R to work with the data. Since we do not have enough time to comprehensively go through all of the steps, we have already created all of the files for you in the described directories above. The goal of this session is to introduce you to 16S data and get you comfortable with the type of data files you might receive after processing your data. Do not be scared! At the end of the session, we will provide you with links to useful sites that you can explore on your own. You should be able to copy/paste the commands as we go through them. Additionally, we hope that this exercise reinforces some of the concepts we discussed earlier in the workshop. 
+We will be using RStudio to interact with R to work with the data. RStudio is an Integrated Development Environment (IDE) program to use R, which is a programming language to analyze and visualize data. If you are not familiar with RStudio, a video tutorial on the different parts can be found [here](https://www.youtube.com/watch?v=I0qNSNt8Vmc). [Data Carpentry](https://datacarpentry.org/R-ecology-lesson/00-before-we-start.html#Knowing_your_way_around_RStudio) also has a great explanation on how to use RStudio.
+
+
+Since we do not have enough time to comprehensively go through all steps of data processing, we have already created all of the files for you in the described directories above. The goal of this session is to introduce you to 16S data and get you comfortable with the type of data files you might receive after processing your data. Do not be scared! You should be able to copy/paste the commands as we go through them. At the end of the session, we will provide you with links to useful sites that you can explore on your own. Additionally, we hope that this exercise reinforces some of the concepts we discussed earlier in the workshop. 
 
 To get started, fire up RStudio! The most important concept is getting you to the correct directory to run all of the commands. This is the folder that you created when you downloaded the file.
 
-```
-setwd("~/Box Sync/Meetings/Anaerobe2016/workshop")
-# make sure that this path is set to your own!
-```
-
-If this does not work, you can navigate to where you downloaded the necessary files under the 'Files' tab  in the righthand panel in RStudio, then set the directory using Session > Set Working Directory > Choose directory at the top of RStudio. This should automatically bring up the command above.
-
-If you are not familiar with RStudio, a video tutorial on the different parts can be found [here](https://www.youtube.com/watch?v=I0qNSNt8Vmc). The main components we will be using are described below:
+The main components of RStudio that we will be using are described below:
 - **_Code:_** Any code that we will run, or notes that you take, can be viewed in different tabs in the topleft corner.
 - **_Console:_** The bottomleft corner contains the console, where we will actually run the code
 - **_Environment:_** Any objects you have created with your code will be listed here, in the topright corner
 - **_Viewer:_** Available files, plots we create, and the help bar can be viewed in the bottomright corner
 
-With that, let's get started on looking at our data!
+Before we start analyzing, let's organize our workspace into one location. In RStudio, this is via its "Projects" function. All of the commands we will do going forward will eminate from this working directory. Use the following steps to do so:
+- Start RStudio
+- Click on 'New Project' under the 'File' menu
+- Choose 'New Directory', then 'Empty Project'
+- Call this directory (folder) something meaningful to you, and place it in a convenient location. You will be working from this folder for this tutorial.
+- Click on 'Create Project'
+- **_Place the files you downloaded as part of this workshop in this folder._** In future steps, you will need to specify the relative path to the data files from this working directory
+	- if you downloaded the AnaerobeWorkshop-master.zip folder, unzip this file, and move the following folders into your Project directory: Rcode, datafiles, figures, and mothurfiles)
+	- this way, you can call out the same relative paths in this tutorial (example: mothurfiles/filename)
+
+Let's also start a scripting file for you to save your work in. This will also be saved within your project directory (you will be copying/pasting into this script from the github instructions). Alternately, you can download this README.md file and save it in your project directory and open it:
+**_Make your own R script:_**
+- Click on the '+' file in the upper left hand corner of RStudio, and choose 'R script'
+- Click 'save' under File, and save your .R file as something meaningful
+	- now, anytime you save on this file, you will also save all comments/code, 
+
+You will be working from this folder for this tutorial. With that, let's get started on looking at our data!
 
 ---
 
 ## Part I: Processing your sequence data
 
-This section is meant to follow alongside the lecture on 16S rRNA gene-based sequence processing. While we will not be processing sequence data in real time, we want to 1) share some resources for you to explore on your own and 2) take a look at some of the data files that you will be working with. 
+This section is meant to follow alongside the lecture on 16S rRNA gene-based sequence processing. While we will not be processing sequence data in real time, we want to:
+- share some resources for you to explore on your own and 
+- take a look at some of the data files that you will be working with 
 
 ### 1. Resources for processing and analyzing your data 
 
 There are several open-source, free programs that you can use to process and analyze your data. The best news is that these resources also have great documentation to guide you! Many of the programs also incorporate the same tools that are widely used in analysis of microbial communities. The resources below are commonly used tools in 16S rRNA gene-based analyses:
 
-- [mothur](http://www.mothur.org/) is a free, open-source software package developed by Dr. Patrick Schloss at the University of Michigan. Commonly used algorithms, bioinformatic tools, and community calculators are incorporated into mothur (and if it is missing, just email mothur to ask to add it!). You can follow a full MiSeq SOP [here](https://mothur.org/wiki/MiSeq_SOP). Dr. Schloss also teaches multiple 2-3 day workshops if you are interested in having a more hands-on tutorial. We will be using files processed in mothur for Part II of this workshop.
-- [QIIME2](https://qiime2.org/) (which has succeeded QIIME) is a free, open-source bioinformatics platform initially developed by the Knight (University of California, San Diego) and Caporaso (Northern Arizona University) labs. QIIME2 has online documentation to get you started on processing and analyzing your data, and has also incorporated visualization of your data as part of the output. 
-- [DADA2](https://benjjneb.github.io/dada2/index.html) is another pipeline that can be used to process and analyze your data. As opposed to clustering your sequences into Operational Taxonomic Units (OTUs), a commonly used method in microbial community analysis to represent species-level composition, DADA2 produces Amplicon Sequence Variants (ASVs), producing a count of exact sequence matches of your data. 
+- [mothur](http://www.mothur.org/) is a free, open-source software package developed by Dr. Patrick Schloss at the University of Michigan. Commonly used algorithms, bioinformatic tools, and community calculators are incorporated into mothur (and if it is missing, just email mothur to ask to add it!). You can follow a full MiSeq SOP [here](https://mothur.org/wiki/MiSeq_SOP). Dr. Schloss also teaches multiple 2-3 day workshops if you are interested in having a more hands-on tutorial that are based on his [Riffomonas](https://riffomonas.org/workshops/), which are free for you to use on your own. We will be using files processed in mothur for Part II of this workshop.
+- [QIIME2](https://qiime2.org/) (which has succeeded QIIME) is a free, open-source bioinformatics platform initially developed by the Knight (University of California, San Diego) and Caporaso (Northern Arizona University) labs. QIIME2 has online documentation to get you started on processing and analyzing your data, with an easy user interface to quickly visualize data. [Workshops](https://workshops.qiime2.org/) (both online and in-person) are also available for you to learn how to use QIIME2.
+- [DADA2](https://benjjneb.github.io/dada2/index.html) is another pipeline that can be used to process and analyze your data. As opposed to clustering your sequences into Operational Taxonomic Units (OTUs), a commonly used method in microbial community analysis to represent species-level composition, DADA2 produces Amplicon Sequence Variants (ASVs), producing a count of exact sequence matches of your data. [DADA2](https://benjjneb.github.io/dada2/tutorial.html) is easily implemented in R following their online tutorial.
 
-We encourage you to check out the documentation and tutorials available to see which program fits your needs. For the purposes of this workshop, we will focus on using R Studio to analyze data files processed using mothur.
+We encourage you to check out the documentation and tutorials available to see which program fits your needs. For the purposes of this workshop, we will focus on using RStudio to analyze data files that were processed using mothur.
 
 ### 2. Processing your sequence data
 
-In general, you will need to use the sequence and quality information in a fastq file to filter out erroneous / bad quality sequences. You will also have to align your sequences to the 16S rRNA region of interest, cluster into OTUs, and taxonomically classify sequences to get the sequence identity. Below is a sample list of commands used in mothur (a mothur [batchfile](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/mbatch_anaerobe.txt), included in this directory) to do each of these steps before we start inquiring the data:
+Before you can tell what of microbiota your samples are hosting, you will need process the sequence and quality information from your raw fastq files. This includes filtering out erroneous / bad quality sequences, aligning your sequences to the 16S rRNA region of interest, clustering your sequences into OTUs, and taxonomically classifying sequences to get the sequence identity. Below is an example list of commands used in mothur (a mothur [batchfile](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/mothurfiles/mbatch_anaerobe.txt), included in this directory) to do each of these steps before we start inquiring the data:
 
 ```
 ##mbatch for samples used in Anaerobe class
@@ -240,6 +254,7 @@ There are many questions and hypotheses that we can formulate. Look at the [meta
 In our presentation, we discussed how sequences within your samples can be taxonomically classified based on the sequence identity (phylotyping). Depending on the level of classification, samples may appear more or less similar to each other. Let's take a look at some of the samples we have previously processed in mothur. We will not be going over every part of the code, but a full description of the steps taken to create the files used here can be found in the [phylotyping.R](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/Rcode/phylotyping.R) file. 
 
 First, let's take a look at the file produced by mothur from the step in taxonomic classification. You can do this by typing in the following commands in the console section of RStudio:
+**_NOTE:_** if you want to save your code in the .R file we created earlier, copy/paste the commands in the grey boxes here into the .R file. You can run the code in your console by highlighting it and selecting 'Run', or copying it into the console again.
 
 ```
 # read in mothur file
@@ -406,6 +421,9 @@ We have combined some of these pieces of information for you below (the full cod
 ```
 sums<-read.table(file="datafiles/anaerobe_summary.txt", header=TRUE)
 summary(sums$FMT)
+sums$FMT <- as.factor(sums$FMT)
+	# R tries to assume the type of data your variables are. For the FMT variable in this case, we need to specify to R that it is a factor before graphing
+
 #compare shannon, invsimpson, and sobs (# 'species')
 	# comparison of FMT v. no FMT, as a whole:
 plot(sums$FMT, sums$invsimpson_03)
