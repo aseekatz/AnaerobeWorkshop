@@ -1,8 +1,8 @@
 # Anaerobe Workshop
 
-Interactive portion of the 1-day Anaerobe microbiome workshop covered by **[Dr. Laura Cox](https://www.linkedin.com/in/lauriemcox)** (Harvard Medical School), **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine), **[Dr. Anna Seekatz](https://www.clemson.edu/science/academics/departments/biosci/about/profiles/aseekat)** (Clemson University), and **Dr. Caroline Wasén** (Harvard Medical School).
+This website is for the interactive portion of the 1-day Anaerobe microbiome workshop covering 16S rRNA gene-based analyses by **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine) and **[Dr. Anna Seekatz](https://www.clemson.edu/science/academics/departments/biosci/about/profiles/aseekat)** (Clemson University). **[Dr. Krishna Rao](https://ihpi.umich.edu/our-experts/krirao)** (University of Michigan Medical School) and **[Dr. Evan Snitkin](https://thesnitkinlab.com/index.php)** (University of Michigan Medical School) will cover microbiome statistics and genomics during the lecture-based portions of the workshop, with Dr. Snitkin conducting an advanced hands-on portion introducing whole genome analysis. 
 
-**_Date:_** July 28, 2022 (updated from 2nd workshop on July 9, 2018)
+**_Date:_** July 12, 2024 (updated from 3rd workshop on July 28, 2022)
 
 **_Description:_** 
 
@@ -28,15 +28,19 @@ After this course, you should be able to:
 
 9:00 – 9:15AM:   	   Introductions / Course overview
 
-9:15 – 10:15AM: 	   Introduction to Microbiome Study Design (Laurie)
+9:15 – 10:00AM: 	   Introduction to Microbiome Study Design (Anna)
 
-10:15 - 10:30AM:	   Integration of Culture-based Techniques into Microbiome Studies (Caroline)
+10:00 - 10:30AM:	   Introduction to Genomics (Evan)
 
 10:30 - 10:45AM:	   BREAK / INSTALLATION SET-UP
 
-10:45 - 12:00PM:	   Metabolomics 
+10:45 - 11:15AM:	   Integrating Statistics into Microbiome Studies (Krishna) 
+
+11:15 - 12:00PM:	   Using Metabolomics to Study the Microbiome (Casey) 
 
 12:00 – 1:00PM:  	   LUNCH
+
+(split into either microbiome or genomics classes)
 
 1:00 – 1:45PM:   	   Overview of Microbiome Approaches (data processing; analysis)
 
@@ -54,14 +58,14 @@ After this course, you should be able to:
 
 #### R and RStudio
 
-We will be using [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/) to re-generate common microbiota analyses based on an existing data set. You will need to install R before downloading RStudio.
+We will be using [R](https://www.r-project.org/) and [RStudio](https://posit.co/downloads/) to re-generate common microbiota analyses based on an existing data set. You will need to install R before downloading RStudio.
 
 These download directions are adapted from [Data Carpentry](https://datacarpentry.org/R-ecology-lesson/index.html), a great resource for learning R to conduct ecological analyses (more details listed at the bottom of this page).
 
 To download R and RStudio:
 
 **_Windows:_**
-- Download R from the [CRAN website](https://cran.r-project.org/bin/windows/base/release.htm)
+- Download R from the [CRAN website]()
 - Run the .exe file that was just downloaded
 
 - Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
