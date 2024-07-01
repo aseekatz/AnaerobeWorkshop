@@ -42,6 +42,8 @@ After this course, you should be able to:
 
 (split into either microbiome or genomics classes)
 
+Schedule for 16S rRNA analysis portion:
+
 1:00 – 1:45PM:   	   Overview of Microbiome Approaches (data processing; analysis)
 
 1:45 - 3:00PM:		   Interactive 16S rRNA gene-based analyses: Using R to analyze data
@@ -65,11 +67,14 @@ These download directions are adapted from [Data Carpentry](https://datacarpentr
 To download R and RStudio:
 
 **_Windows:_**
-- Download R from the [CRAN website]()
-- Run the .exe file that was just downloaded
+- Download R from the [CRAN website](https://cran.r-project.org/)
+- Click on Download R for Windows
+- Click on base
+- Click on 'Download R-4.4.1 for Windows'
+- Open the .exe file that was just downloaded
 
-- Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
-	- Under All Installers, download the RStudio Installer for Windows.
+- Go to the [RStudio download page](https://posit.co/download/rstudio-desktop/#download)
+	- Under All Installers and Tarballs, download the RStudio Installer for Windows.
 	- Double click the file to install it
 	- Once it’s installed, open RStudio to make sure it works and you don’t get any error messages
 
@@ -80,8 +85,8 @@ To download R and RStudio:
 - It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed by some packages)
 
 - Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
-	- Under All Installers, download the RStudio Installer for MacOS.
-	- Double click the file to install RStudio
+	- Under 2: Install RStudio, download the RStudio Installer for MacOS 12+. (note: if you are working on older MacOS systems, you will need to choose one of the previous versions from the link).
+	- Double click the file to install RStudio and add to Applications
 	- Once it’s installed, open RStudio to make sure it works and you don’t get any error messages
 
 **_Linux:_**
@@ -92,11 +97,11 @@ To download R and RStudio:
 
 #### Text Editor
 
-While not required for this workshop, we recommend downloading some type of text editor to easily visualize your code. [Sublime Text](https://www.sublimetext.com/) is a basic editor and can be installed on Windows or MacOS. Nano should be pre-installed on both Mac OS X and Linux. If you are using MacOS X, you could also download [BBEdit](https://www.barebones.com/products/bbedit/).
+While not required for this workshop, we recommend downloading some type of text editor to easily visualize your code. [Sublime Text](https://www.sublimetext.com/) is a basic editor and can be installed on Windows or MacOS. Nano should be pre-installed on both Mac OS X and Linux. If you are using MacOS X, you could also download the free version of [BBEdit](https://www.barebones.com/products/bbedit/).
 
 #### Downloading the files
 
-All files used in this exercise can be downloaded from this github directory. Use the green 'Clone or Download' button on the topright to download all the files. 
+All files used in this exercise can be downloaded from this github directory. Use the green 'Clone' or 'Download ZIP' button on the topright to download all the files. Unzip the file by clicking on it.
 
 ##### Directory/file descriptions
 - [mothur-generated files](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/mothurfiles)
@@ -129,6 +134,7 @@ Before we start analyzing, let's organize our workspace into one location. In RS
 - **_Place the files you downloaded as part of this workshop in this folder._** In future steps, you will need to specify the relative path to the data files from this working directory
 	- if you downloaded the AnaerobeWorkshop-master.zip folder, unzip this file, and move the following folders into your Project directory: Rcode, datafiles, figures, and mothurfiles)
 	- this way, you can call out the same relative paths in this tutorial (example: mothurfiles/filename)
+   	- you can also make your downloaded folder your Project Directory by choosing 'Existing Directory' from the New Project prompt
 
 Let's also start a scripting file for you to save your work in. This will also be saved within your project directory (you will be copying/pasting into this script from the github instructions). Alternately, you can download this README.md file and save it in your project directory and open it:
 
@@ -155,7 +161,7 @@ There are several open-source, free programs that you can use to process and ana
 - [QIIME2](https://qiime2.org/) (which has succeeded QIIME) is a free, open-source bioinformatics platform initially developed by the Knight (University of California, San Diego) and Caporaso (Northern Arizona University) labs. QIIME2 has online documentation to get you started on processing and analyzing your data, with an easy user interface to quickly visualize data. [Workshops](https://workshops.qiime2.org/) (both online and in-person) are also available for you to learn how to use QIIME2.
 - [DADA2](https://benjjneb.github.io/dada2/index.html) is another pipeline that can be used to process and analyze your data. As opposed to clustering your sequences into Operational Taxonomic Units (OTUs), a commonly used method in microbial community analysis to represent species-level composition, DADA2 produces Amplicon Sequence Variants (ASVs), producing a count of exact sequence matches of your data. [DADA2](https://benjjneb.github.io/dada2/tutorial.html) is easily implemented in R following their online tutorial.
 
-We encourage you to check out the documentation and tutorials available to see which program fits your needs. For the purposes of this workshop, we will focus on using RStudio to analyze data files that were processed using mothur.
+We encourage you to check out the documentation and tutorials available to see which program fits your needs. For the purposes of this workshop, we will focus on using RStudio to analyze data files that were processed using mothur. Any of the analyses done in this tutorial are applicable to data processed by any of these pipelines.
 
 ### 2. Processing your sequence data
 
@@ -221,8 +227,8 @@ The accompanying lecture will discuss each of these steps in more detail. On you
 - filtering sequences of inappropriate length, unaligned / ambiguous / homopolymeric / chimeric sequences
 - aligning sequences to a 16S rRNA database, such as the following databases (note that mothur, QIIME2, and DADA2 have these databases incorporated into their pipelines for your convenience):
 	- [SILVA](https://www.arb-silva.de/)
-	- [Greengenes](http://greengenes.secondgenome.com/)
-	- [RDP](https://rdp.cme.msu.edu/)
+	- [Greengenes](https://github.com/biocore/q2-greengenes2/)
+	- [RDP](https://rdp.cme.msu.edu/) (note: this database is no longer maintained and not recommended for future use; the link also appears to be dead)
 - classifying your sequences using one of the above databases
 - clustering your sequences into OTUs, which represent a more species-level comparison (or, if using DADA2, creating ASVs)
 - calculating different summary statistics (alpha or beta diversity)
