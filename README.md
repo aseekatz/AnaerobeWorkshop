@@ -110,6 +110,10 @@ All files used in this exercise can be downloaded from this github directory. Us
 - [metadata](https://github.com/aseekatz/AnaerobeWorkshop/blob/master/datafiles/metadata.txt)
 - [figures](https://github.com/aseekatz/AnaerobeWorkshop/tree/master/figures)
 
+#### A note on base R vs R packages before we begin
+
+The goal of this hands-on tutorial is to get you comfortable with output files after processing your 16S rRNA sequencing data and give you some tangeable experience with some of the common microbiota analyses. Over the last decade (and more), there have been improvements to R packages that greatly improve the efficiency of your data handling and analysis pipelines. Because many of these improvements would require a full class on R alone, we will be working mostly with 'base R' (i.e., the most basic commands available for viewing / analyzing your data). We highly recommend doing any of the tidyr / tidyverse tutorials to learn R so that you can more efficiently learn to work with your data (see recommendations at the end of the workshop).
+
 #### Start the session
 
 We will be using RStudio to interact with R to work with the data. RStudio is an Integrated Development Environment (IDE) program to use R, which is a programming language to analyze and visualize data. If you are not familiar with RStudio, a video tutorial on the different parts can be found [here](https://www.youtube.com/watch?v=I0qNSNt8Vmc). [Data Carpentry](https://datacarpentry.org/R-ecology-lesson/00-before-we-start.html#Knowing_your_way_around_RStudio) also has a great explanation on how to use RStudio.
