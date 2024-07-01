@@ -774,6 +774,7 @@ We hope that this short exercise gave you a better understanding of how microbio
 	- **[tidyr](https://tidyr.tidyverse.org/)** cleans up messy data and makes it more reproducible. Learning how to properly record and store data will make your coding life easier
 	- **[ggplot2](https://ggplot2.tidyverse.org/)** is one of the more common ways to graph / visualize data in R. 
 - - **[Software Carpentry](http://software-carpentry.org/)** provides free workshops and tutorials around the world. While they do host onsite workshops, most of them should be available online. The [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) is particularly useful for microbiome analysis. This tutorial will walk you through installing and using R. Check them out!
+- The **[phyloseq](https://joey711.github.io/phyloseq/)** package in R is a comprehensive package for importing, analyzing, and visualizing microbiota data from mothur, qiime2, dada2, etc. 
 - [Dr. Patrick Schloss](http://www.schlosslab.org/) at the University of Michigan offers in-person workshops on both **[mothur and R](http://www.mothur.org/wiki/Workshops)**. Dr. Schloss's **[Riffomonas](https://riffomonas.org/)** classes list upcoming workshops and free training modules. I recommend the following:
 	- **[minimalR](https://riffomonas.org/minimalR/)**: learn to visualize microbiome data
 	- **[generalR](https://riffomonas.org/generalR/)**: learn how to generally use R
