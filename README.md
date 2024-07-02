@@ -2,7 +2,7 @@
 
 This website is for the interactive portion of the 1-day Anaerobe microbiome workshop covering 16S rRNA gene-based analyses by **[Dr. Casey Theriot](https://theriotlab.org/)** (NC State University College of Veterinary Medicine) and **[Dr. Anna Seekatz](https://www.clemson.edu/science/academics/departments/biosci/about/profiles/aseekat)** (Clemson University). **[Dr. Krishna Rao](https://ihpi.umich.edu/our-experts/krirao)** (University of Michigan Medical School) and **[Dr. Evan Snitkin](https://thesnitkinlab.com/index.php)** (University of Michigan Medical School) will cover microbiome statistics and genomics during the lecture-based portions of the workshop, with Dr. Snitkin conducting an advanced hands-on portion introducing whole genome analysis. 
 
-**_Date:_** July 12, 2024 (updated from 3rd workshop on July 28, 2022)
+**_Date:_** July 8, 2024 (updated from 3rd workshop on July 28, 2022)
 
 **_Description:_** 
 
