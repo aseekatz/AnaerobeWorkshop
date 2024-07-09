@@ -784,15 +784,16 @@ We hope that this short exercise gave you a better understanding of how microbio
 ## post-conference materials:
 
 - Colors in your visualizations matter! As requested, here are some helpful color packages / code to help you choose a pleasing and informative color palette in R:
-  	- **[This website](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)** provides links to multiple color palettes that you can play around with. If you want to visualize and list the actual colors in a graph, use the code below:
+  	- **[This website](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)** provides links to multiple color palettes that you can play around with. If you want to visualize and list the actual colors in a graph, use the code below
+  	- **[r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes)** is a great resource explaining color design in R
+ 	- There are many more out there! 
   
 ```
 # hcl.colors(6, palette="Zissou 1")		# this will list the colors, choosing 6 from the color palette
 # barplot(1:length(hcl.colors(7, palette="Zissou 1")), col=hcl.colors(7, palette="Zissou 1"), las=2, names=hcl.colors(7, palette="Zissou 1"))
 
 ```
-	- **[r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes)** is a great resource explaining color design in R
- 	- There are many more out there! 
+
  
 
 
